@@ -1,0 +1,1 @@
+We can have as many partials as we need, see index-description for reasons we might need to make partials.

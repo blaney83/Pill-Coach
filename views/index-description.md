@@ -1,0 +1,1 @@
+The index.handlebars file is basically the entire body of the html.  Any potential repeatable pieces of html can be broken out into partials, for example, when a new medication is added we can run it all through the same code to get a nice uniform site.
