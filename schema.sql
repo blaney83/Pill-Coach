@@ -1,2 +1,2 @@
-CREATE DATABASE burgers_db;
-USE burgers_db;
+CREATE DATABASE proj_2;
+USE proj_2;

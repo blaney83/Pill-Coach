@@ -9,12 +9,16 @@
     "mysql2": "^1.6.4",
     "passport": "^0.4.0",
     "path": "^0.12.7",
-    "sequelize": "^4.41.2"
+    "sequelize": "^4.41.2",
+    "bcrypt-nodejs": "0.0.3",
+    "express-session": "^1.14.2",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "watch": "nodemon server.js"
   },
   "repository": {
     "type": "git",
