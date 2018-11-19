@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Passport Authentication</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
+  <link href="stylesheets/style.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+<script src='lib/jquery.min.js'></script>
+<script src='lib/moment.min.js'></script>
+<script src='fullcalendar/fullcalendar.js'></script>
+
+<script>
+
+
+
+    $(document).ready(function () {
+
+        // page is now ready, initialize the calendar...
+
+        $('#calendar').fullCalendar({
+            editable: true,
+            header: { center: 'month,listMonth' },
+
+            // buttons for switching between views
+
+            views: {
+                month: { // name of view
+                    titleFormat: 'MMMM YYYY'
+                    // other view-specific options here
+                },
+                listMonth: {
+
+                }
+            },
+           
+            
+            eventSources: [
+
+                // your event source
+                {
+                    url: '/api/eventList', // use the `url` property
+                    color: 'seagreen',    // an option!
+                    textColor: 'black'  // an option!
+                }
+
+                // any other sources...
+
+            ]
+
+        });
+    });
+
+</script>
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h2>Login Form</h2>
+        <form class="login">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="email-input" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="password-input" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-default">Login</button>
+        </form>
+        <br />
+        <p>Or sign up <a href="/">here</a></p>
+      </div>
+    </div>
+
+    <div id='calendar'></div>
+  </div>
+
+  
+  <script type="text/javascript" src="js/login.js"></script>
+
+</body>
+
+</html>
