@@ -1,2 +1,2 @@
-CREATE DATABASE users_db;
-USE users_db;
+CREATE DATABASE proj_2;
+USE proj_2;

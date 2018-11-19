@@ -28,4 +28,8 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/members.html"));
   });
 
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 93646b93f2f51a07ae043a30ac7c9a0a34d15d25
