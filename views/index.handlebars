@@ -1,8 +1,79 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+    Demo Rx Info
+</button>
+
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item active">
+                                <a data-toggle="tab" class="nav-link active" href="#home">Active</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-toggle="tab" class="nav-link" href="#relatedMeds">Related Rx's</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-toggle="tab" class="nav-link" href="#dosing">Dosing</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-toggle="tab" class="nav-link" href="#precautions">Precautions</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in card-body active show">
+                            <h5 class="card-title">General Information</h5>
+                            <p class="card-text" id="sendOverviewHere">With supporting text below as a natural lead-in
+                                to additional
+                                content.</p>
+                        </div>
+                        <div id="relatedMeds" class="tab-pane fade in card-body">
+                            <h5 class="card-title">Related Rx's</h5>
+                            <p class="card-text" id="sendRelatedDrugsHere">With supporting text below as a natural
+                                lead-in to additional
+                                content.</p>
+                        </div>
+                        <div id="dosing" class="tab-pane fade in card-body">
+                            <h5 class="card-title">Dosing</h5>
+                            <p class="card-text" id="sendDosingHere">With supporting text below as a natural lead-in to
+                                additional
+                                content.</p>
+                        </div>
+                        <div id="precautions" class="tab-pane fade in card-body">
+                            <h5 class="card-title">Precautions</h5>
+                            <p class="card-text" id="sendPrecautionsHere">With supporting text below as a natural
+                                lead-in to additional
+                                content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back to Prescriptions</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container col-10" id="tile-cont">
     <h2 id="title">Current Prescriptions</h2>
     <div class="text-center d-flex justify-content-around">
     {{#each pills}}
-        {{> tiles}}
+    {{> tiles}}
     {{/each}}
     </div>
 </div>
