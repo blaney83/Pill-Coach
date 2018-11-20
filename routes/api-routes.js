@@ -9,7 +9,8 @@ module.exports = function (app) {
     // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
     // So we're sending the user back the route to the members page because the redirect will happen on the front end
     // They won't get this or even be able to access this page if they aren't authed
-    res.render("index");
+    res.json({url: "/"});
+    console.log("echo");
   });
 
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
@@ -51,53 +52,3 @@ module.exports = function (app) {
     }
   });
 };
-
-//! Below are all examples of using sequelize with handlebars to CRUD. Above code is always necessary.
-
-//     app.get("/", function(req, res) {
-//         db.Burger.findAll({}).then(function(dbBurger) {
-//             let hbsObject = {
-//                 burgers: dbBurger
-//             }
-//             res.render("index", hbsObject);
-//         })
-//     })
-
-
-//     app.get("/api/burgers", function(req, res) {
-//         db.Burger.findAll({}).then(function(dbBurger) {
-
-//             res.json(dbBurger);
-//         });
-//     });
-
-//     app.post("/api/burgers", function(req, res) {
-//         console.log(req.body);
-
-//         db.Burger.create({
-//           burger_name: req.body.name,
-//           devoured: req.body.devoured
-//         }).then(function(dbBurger) {
-
-//           res.json(dbBurger);
-//         });
-//       });
-
-//       app.put("/api/burgers/:id", function(req, res) {
-//         db.Burger.update({
-//             devoured: req.body.devoured
-//         },{
-//             where: { id: req.params.id }
-//         }).then(function(dbBurger) {
-//           res.json(dbBurger);
-//         });
-//       });
-
-//       app.delete("/api/burgers/:id", function(req, res) {
-//         db.Burger.destroy({
-//           where: { id: req.params.id }
-//         }).then(function(dbBurger) {
-//           res.json(dbBurger);
-//         });
-//       });
-
