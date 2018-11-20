@@ -1,1 +1,6 @@
-<h1>TESTING, please work!</h1>
+<div class="container col-10" id="tile-cont">
+    <h2 id="title">Current Prescriptions</h2>
+    {{#each pills}}
+        {{> tiles}}
+    {{/each}}
+</div>
