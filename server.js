@@ -1,10 +1,12 @@
-let express = require("express");
-let session = require("express-session");
-let passport = require("./config/passport");
+const express = require("express");
+const session = require("express-session");
+const passport = require("./config/passport");
+const cors = require("cors");
 const morgan = require("morgan");
 
 let app = express();
-let PORT = process.env.PORT || 8080;
+app.use(cors());
+let PORT = process.env.PORT || 3000;
 
 let db = require("./models");
 
@@ -31,6 +33,8 @@ app.set("view engine", "handlebars");
 // Routes
 require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app);
+require("./routes/rx-routes.js")(app);
+
 
 
 db.sequelize.sync().then(function() {
