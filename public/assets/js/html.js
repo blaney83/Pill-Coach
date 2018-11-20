@@ -4,15 +4,18 @@
 $(document).ready(function () {
     console.log("hello")
 
-    $("button").on("click", function(){
+    $(document).on("click", ".tile", function(event){
+        $("#exampleModalLong").modal("toggle")
+        let rx = event.target.id;
+        console.log(rx)
+
         $.ajax({
             method: "GET",
-            url: "/getinfo"
+            url: "/getinfo",
+            data: {
+                key: rx,
+            },
         }).then(function (resp) {
-            console.log(resp)
-            console.log(resp)
-            console.log(resp)
-            console.log(resp)
             console.log(resp)
             let precautions = "<h3>Precautions</h3><h5>Never take this medication with the following: </h5>" + resp.doNotUseWith + "<h5>The presence of other medical problems may affect the use of this medicine. Make sure you tell your doctor if you have any other medical problems, especially: </h5>" + parseArrayIntoUnorderedList(resp.precautionMedicalConditions) + "<h5>FDA Warning Label: </h5>" + resp.infoBlackBox
             
