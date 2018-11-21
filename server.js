@@ -36,7 +36,7 @@ app.set("view engine", "handlebars");
 // Routes
 require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app);
-require("./routes/rx-routes.js")(app);
+require("./scraper.js")(app);
 
 
 db.sequelize.sync().then(function() {

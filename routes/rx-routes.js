@@ -1,6 +1,8 @@
 
 const cheerio = require("cheerio");
-const rp = require("request-promise")
+const request = require("request");
+// const rp = require("request-promise");
+// const path = require("path")
 
 module.exports = function (app) {
 
@@ -15,10 +17,12 @@ module.exports = function (app) {
         let sideEffectsData = {}
 
         //request for getting side effect info
-        rp(sideEffectsSearchURL, function (error, response, html) {
+        request(sideEffectsSearchURL, function (error, response, html) {
+
             if (!error && response.statusCode == 200) {
                 //loads scrapped html
                 let $ = cheerio.load(html)
+                console.log($)
                 let sideEffectsDisclaimer = "Along with its needed effects, a medicine may cause some unwanted effects. Although not all of these side effects may occur, if they do occur they may need medical attention.Check with your doctor immediately if any of the following side effects occur:"
                 let whatToWatchForSummary = $("#content > section > section > section > section > section.s8ji26z-0.kErmZY > section > div._180S5IyBsaerENxigrcm3J > div._2rANW1lgQ9bqbo49JhQeTK > div > div > div.xldag1-1.jexVRC > div:nth-child(1)").text();
                 let allSideEffectInfo = $("#content > section > section > section > section > section.s8ji26z-0.kErmZY > section > div._180S5IyBsaerENxigrcm3J > div._2rANW1lgQ9bqbo49JhQeTK > div > div > div.xldag1-1.gmhNEZ > div").html();
@@ -82,7 +86,7 @@ module.exports = function (app) {
         // })
 
         //request for getting general info
-        rp(mainSearchURL, function (error, response, html) {
+        request(mainSearchURL, function (error, response, html) {
             if (!error && response.statusCode == 200) {
 
                 //loads scrapped html
