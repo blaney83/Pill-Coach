@@ -3,6 +3,50 @@
     Demo Rx Info
 </button>
 
+{{!-- Add new rx form --}}
+
+<button type="button" class="btn btn-primary change-title-pen" data-toggle="modal" data-target="#exampleModal">
+    <i class="tiny material-icons">Add Pill</i>
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Medication</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="create-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Medication Name: </label>
+                        <input type="text" class="form-control new-title" id="name" placeholder="Ibuprofen">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Quantity: </label>
+                        <input type="text" class="form-control new-quantity" id="name" placeholder="40">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Dosage: </label>
+                        <input type="text" class="form-control new-dosage" id="name" placeholder="800mg">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Frequency: </label>
+                        <input type="text" class="form-control new-frequency" id="name" placeholder="2 pills every 6 hours">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary change-title">Save New Medication</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <!-- Calendar -->
 
 <h1 class="centered">Upcoming Doses</h1>
@@ -98,8 +142,8 @@
 <div class="container col-10" id="tile-cont">
     <h2 id="title">Current Prescriptions</h2>
     <div class="text-center d-flex justify-content-around">
-    {{#each pills}}
-    {{> tiles}}
-    {{/each}}
+        {{#each pills}}
+        {{> tiles}}
+        {{/each}}
     </div>
 </div>
