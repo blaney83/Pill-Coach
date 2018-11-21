@@ -1,20 +1,6 @@
 
 const cheerio = require("cheerio");
-const request = require("request");
 const axios = require("axios")
-// const rp = require("request-promise");
-// const path = require("path")
-
-// axios.get(URL).then(res => res);
-
-// const ajaxCalls = [
-//     axios.get(URL),
-//     axios.get(URL2)
-// ];
-
-// Promise.all(ajaxCalls).then(res => {
-
-// })
 
 module.exports = function (app) {
 
@@ -180,16 +166,5 @@ module.exports = function (app) {
             };
             res.send(finalData)
         })
-
-        // setTimeout(function () {
-        //     let finalData = {
-        //         generalInfo: dataObj,
-        //         sideEffects: sideEffectsData
-        //     };
-        //     console.log(finalData);
-        //     console.log(dataObj);
-        //     console.log(sideEffectsData);
-        //     res.send(finalData);
-        // }, 10000)
     })
 }
