@@ -2,3 +2,16 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
+.tile {
+  margin: 10px;
+  height: 150px;
+  background-color:grey;
+}
+#tile-cont {
+background-color:bisque;
+}
+#title {
+  color: white;
+  text-decoration-line: underline; 
+  text-decoration-color: aqua;
+}

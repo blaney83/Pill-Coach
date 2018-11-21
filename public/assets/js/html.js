@@ -1,62 +1,37 @@
-//! This is all example javascript with .on("click") functions running ajax calls to update database.
 
-// $(function () {
-//     $(".change-devoured").on("click", function (event) {
-//         var id = $(this).data("id");
-//         var newDevoured = $(this).data("newdevoured");
 
-//         var newDevouredState = {
-//             devoured: newDevoured
-//         };
+//current code for Modal vvvvvvvvvvvvvvv
+$(document).ready(function () {
+    console.log("hello")
 
-//         $.ajax("/api/burgers/" + id, {
-//             type: "PUT",
-//             data: newDevouredState
-//         }).then(
-//             function () {
-//                 console.log("changed sleep to", newDevoured);
-
-//                 location.reload();
-//             }
-//         );
-//     });
-
-//     $(".create-form").on("submit", function (event) {
-
-//         event.preventDefault();
-
-//         var newBurger = {
-//             name: $("#ca").val().trim(),
-//             devoured: $("[name=devoured]:checked").val().trim()
-//         };
-
-//         $.ajax("/api/burgers", {
-//             type: "POST",
-//             data: newBurger
-//         }).then(
-//             function () {
-//                 console.log("created new burger");
-                
-//                 location.reload();
-//             }
-//         );
-//     });
-
-//     $(".delete-burger").on("click", function (event) {
-
-//         event.preventDefault();
-
-//         let id = $(this).attr("data-id")
-//         console.log(id)
-
-//         $.ajax("/api/burgers/" + id, {
-//             type: "DELETE",
-//         }).then(
-//             function () {
-//                 console.log("created new burger");
-                
-//                 location.reload();
-//             }
-//         );
-//     });
-// });
+    $("button").on("click", function(){
+        $.ajax({
+            method: "GET",
+            url: "/getinfo"
+        }).then(function (resp) {
+            console.log(resp)
+            console.log(resp)
+            console.log(resp)
+            console.log(resp)
+            console.log(resp)
+            let precautions = "<h3>Precautions</h3><h5>Never take this medication with the following: </h5>" + resp.doNotUseWith + "<h5>The presence of other medical problems may affect the use of this medicine. Make sure you tell your doctor if you have any other medical problems, especially: </h5>" + parseArrayIntoUnorderedList(resp.precautionMedicalConditions) + "<h5>FDA Warning Label: </h5>" + resp.infoBlackBox
+            
+            $("#sendPrecautionsHere").html(precautions);
+            $("#sendRelatedDrugsHere").html(parseArrayIntoUnorderedList(resp.infoRelatedPills));
+            $("#sendDosingHere").html(resp.dosingInfoParsed);
+            $("#sendOverviewHere").html(resp.overviewContent)
+            
+            function parseArrayIntoUnorderedList(array){
+                let starterArray = ["<ul>"]
+                array.forEach(function(val){
+                    let listItem = "<li>" + val + "</li>"
+                    starterArray.push(listItem)
+                });
+                starterArray.push("</ul>")
+                let returnString = starterArray.join("")
+                return(returnString);
+            }
+        })
+    })
+})
+//current code for Modal ^^^^^^^^^^^^^^^^^^^^^
