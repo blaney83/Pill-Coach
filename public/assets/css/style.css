@@ -1,17 +1,64 @@
 form.signup,
 form.login {
-  margin-top: 50px;
+  margin-top: 30px;
+}
+body {
+  background-color: rgba(255, 0, 0, 0.468);
 }
 .tile {
-  margin: 10px;
   height: 150px;
+  width: 150px;
+  margin: 10px auto;
+  padding: 0;
   background-color:grey;
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, .3);
 }
 #tile-cont {
-background-color:bisque;
+background-color:rgba(255, 255, 255, .4);
 }
 #title {
   color: white;
-  text-decoration-line: underline; 
-  text-decoration-color: aqua;
+  text-align: center; 
 }
+#calendar {
+  display: block;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+#calTitle {
+  text-align: center;
+  color: white;
+}
+
+.pillName {
+  background-color: rgba(255, 255, 255, .8); 
+  width: 100%; 
+  margin: 0;
+}
+
+.fc-left >h2 {
+  font-size: 20px;
+  text-align: center;
+}
+
+.col-md-offset-3 >h2 {
+  text-align: center;
+}
+
+.form-control {
+  text-align: center;
+}
+
+.submitButton {
+  margin: 5px auto;
+}
+
+.middlePage {
+  margin-top: 200px;
+}
+.centered {
+  text-align: center
+}
+
+

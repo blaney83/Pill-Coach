@@ -2,9 +2,10 @@
 <html lang="en">
 
 <head>
-	<title>Passport Authentication</title>
+	<title>Never Miss A Pill</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="http://www.myiconfinder.com/uploads/iconsets/256-256-c97dfa83201bd98c5d7ecacba360a5a9-pill.png" type="image/x-icon">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	 crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -13,12 +14,19 @@
 	 crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 	 crossorigin="anonymous"></script>
+	    {{!-- <script src='/fullcalendar/lib/jquery.min.js'></script> --}}
+    <script src='/fullcalendar/lib/moment.min.js'></script>
+    <link rel='stylesheet' href='/fullcalendar/fullcalendar.css' />
+    <script src='/fullcalendar/fullcalendar.js'></script>
 	<link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 
 <body>
-	{{{body}}}
 	<script src="/assets/js/html.js"></script>
+	<script src="/assets/js/calendar.js"></script>
+	{{!-- <script src="fc-modify-event-simple.js"></script> --}}
+	{{{body}}}
+	
 </body>
 
 </html>
