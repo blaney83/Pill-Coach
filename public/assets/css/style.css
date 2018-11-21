@@ -10,7 +10,9 @@ body {
   width: 150px;
   margin: 10px auto;
   padding: 0;
-  background-color:grey;
+  /* background-image: url("https://images.unsplash.com/photo-1523245332310-ff40ff34a419?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=62d229e6b3ac54dfb1a674ef62c17c9c&auto=format&fit=crop&w=1650&q=80"); */
+  background-size: cover;
+  /* background-color:grey; */
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, .3);
 }
 #tile-cont {
@@ -32,7 +34,8 @@ background-color:rgba(255, 255, 255, .4);
 }
 
 .pillName {
-  background-color: rgba(255, 255, 255, .8); 
+  background-color: rgba(0, 0, 0, .5); 
+  color: white; 
   width: 100%; 
   margin: 0;
 }
