@@ -3,11 +3,70 @@
     Demo Rx Info
 </button> --}}
 
+{{!-- Add new rx form --}}
+
+<button type="button" class="btn btn-primary change-title-pen" data-toggle="modal" data-target="#exampleModal">
+    <i class="tiny material-icons">Add Pill</i>
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Medication</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="create-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Medication Name: </label>
+                        <input type="text" class="form-control new-title" id="name" placeholder="Ibuprofen">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Quantity: </label>
+                        <input type="text" class="form-control new-quantity" id="name" placeholder="40">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Dosage: </label>
+                        <input type="text" class="form-control new-dosage" id="name" placeholder="800mg">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Frequency: </label>
+                        <input type="text" class="form-control new-frequency" id="name" placeholder="2 pills every 6 hours">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary change-title">Save New Medication</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <!-- Calendar -->
 <div class="container">
     <div class="row justify-content-center">
         <div class="col col-lg-8">
             <h1 id="calTitle">Upcoming Doses</h1>
+            <div class="d-flex justify-content-around add-pill-div">
+    <button class="container bttn" data-toggle="modal" data-target="#exampleModal">
+        <svg width="277" height="62">
+            <defs>
+                <linearGradient id="grad1">
+                    <stop offset="0%" stop-color="#E5F3FF" />
+                    <stop offset="100%" stop-color="#196BB2" />
+                </linearGradient>
+            </defs>
+            <rect x="5" y="5" rx="25" fill="none" stroke="url(#grad1)" width="266" height="50"></rect>
+        </svg>
+        <span>Add Pill</span>
+        </a>
+    </button>
+</div>
             <div class="row">
                 <div class="col">
                     <div id='calendar'></div>
