@@ -24,6 +24,24 @@ $(document).ready(function () {
                 },
             }).then(function (resp) {
                 console.log(resp)
+                console.log(Object.entries(resp.sideEffects))
+                console.log(Object.entries(resp.generalInfo))
+                let sideEffectsMissingCheckMainArray = Object.entries(resp.sideEffects)
+                let genInfoMissingCheckMainArray = Object.entries(resp.generalInfo)
+
+                sideEffectsMissingCheckMainArray.forEach(function(array, ind){
+                    if(array[1].length <= 2){
+                        console.log(array[0] + "is missing data")
+                    }
+                })
+
+                genInfoMissingCheckMainArray.forEach(function(array, ind){
+                    console.log(array[0] + " " + array[1].length + (typeof array[1]))
+                    if((typeof array[1]) != "object" && array[1].length <= 2 && array[0] != "imageElement" || array[1] == "<ul>" ){
+                        console.log(array[0] + "is missing data")
+                    }
+                })
+
                 let precautions = "<h3>Precautions</h3><h5>Never take this medication with the following: </h5>" + resp.generalInfo.doNotUseWith + "<h5>The presence of other medical problems may affect the use of this medicine. Make sure you tell your doctor if you have any other medical problems, especially: </h5>" + ListSmartLinks(resp.generalInfo.precautionMedicalConditions) + "<h5>FDA Warning Label: </h5>" + resp.infoBlackBox
                 let sideEffectsBuild = "<h4>" + resp.sideEffects.sideEffectsDisclaimer + "</h4>" + resp.sideEffects.sideEffectsLists.join("")
                 $("#sendPrecautionsHere").html(precautions);
