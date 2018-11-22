@@ -148,7 +148,7 @@ module.exports = function (app) {
                         let intermediateString = dosingContent.join("<ul>")
                         let anotherArray = intermediateString.split("&#x2014;")
                         finalReAssemblyArray.push("<ul>");
-                        finalReAssemblyArray.push(anotherArray.join("--"));
+                        finalReAssemblyArray.push(anotherArray.join("-"));
                         let returnProduct = finalReAssemblyArray.join("")
                         return (returnProduct);
                     }

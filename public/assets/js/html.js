@@ -24,16 +24,16 @@ $(document).ready(function () {
                 },
             }).then(function (resp) {
                 console.log(resp)
-                let precautions = "<h3>Precautions</h3><h5>Never take this medication with the following: </h5>" + resp.generalInfo.doNotUseWith + "<h5>The presence of other medical problems may affect the use of this medicine. Make sure you tell your doctor if you have any other medical problems, especially: </h5>" + unorderedListSmartLinks(resp.generalInfo.precautionMedicalConditions) + "<h5>FDA Warning Label: </h5>" + resp.infoBlackBox
+                let precautions = "<h3>Precautions</h3><h5>Never take this medication with the following: </h5>" + resp.generalInfo.doNotUseWith + "<h5>The presence of other medical problems may affect the use of this medicine. Make sure you tell your doctor if you have any other medical problems, especially: </h5>" + ListSmartLinks(resp.generalInfo.precautionMedicalConditions) + "<h5>FDA Warning Label: </h5>" + resp.infoBlackBox
                 let sideEffectsBuild = "<h4>" + resp.sideEffects.sideEffectsDisclaimer + "</h4>" + resp.sideEffects.sideEffectsLists.join("")
                 $("#sendPrecautionsHere").html(precautions);
-                $("#sendRelatedDrugsHere").html(unorderedListSmartLinks(resp.generalInfo.infoRelatedPills));
+                $("#sendRelatedDrugsHere").html(ListSmartLinks(resp.generalInfo.infoRelatedPills));
                 $("#sendDosingHere").html(resp.generalInfo.dosingInfoParsed);
                 $("#sendOverviewHere").html(resp.generalInfo.overviewContent);
                 $("#sendWhatToWatchForHere").text(resp.sideEffects.whatToWatchForSummary)
                 $("#sendSideEffectsHere").html(sideEffectsBuild);
 
-                function unorderedListSmartLinks(array) {
+                function ListSmartLinks(array) {
                     let starterArray = ["<ul>"]
                     array.forEach(function (val) {
                         let valArr = val.split("");
@@ -71,7 +71,7 @@ $(document).ready(function () {
     });
 
     function checkPunctuation(val) {
-        if(val == ","|| val== "("|| val=="["){
+        if(val == ","|| val== "("|| val=="["|| val== "."|| val== "—"){
             return true;
         }
     }
