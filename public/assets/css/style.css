@@ -3,7 +3,10 @@ form.login {
   margin-top: 30px;
 }
 body {
-    background-image: url("https://www.xmple.com/wallpaper/orange-pink-gradient-linear-1920x1080-c2-f6be53-ed376d-a-90-f-14.svg")
+    background-image: url("https://www.xmple.com/wallpaper/orange-pink-gradient-linear-1920x1080-c2-f6be53-ed376d-a-90-f-14.svg");
+    background-attachment: fixed; 
+    background-size: cover;
+    background-position: center;
 }
 .tile {
   height: 150px;
