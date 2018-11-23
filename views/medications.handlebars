@@ -1,0 +1,23 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-between">
+    <li class="page-item">
+      <a class="pageButton page-link" href="/" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item">
+      <a class="pageButton page-link" href="/meds">Next</a>
+    </li>
+  </ul>
+</nav>
+
+    <div class= "scene_element scene_element--fadeinright">
+        <div class="row">
+            <div class="col" id="tile-cont">
+                <h2 id="title">Current Prescriptions</h2>
+                <div class="row justify-content-center">
+                    {{#each pills}}
+                    {{> tiles}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>

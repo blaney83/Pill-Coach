@@ -19,7 +19,7 @@ module.exports = function(app) {
         return res.render("index", hbsObject);
       });
     }else
-    {res.sendFile(path.join(__dirname, "../public/signup.html"));}
+    res.sendFile(path.join(__dirname, "../public/login.html"));
   });
 
   app.get("/login", function(req, res) {
@@ -27,7 +27,8 @@ module.exports = function(app) {
     if (req.user) {
       res.render("index");
     }
-    res.sendFile(path.join(__dirname, "../public/login.html"));
+    {res.sendFile(path.join(__dirname, "../public/signup.html"));}
+
   });
 
   // Here we've add our isAuthenticated middleware to this route.
@@ -36,4 +37,10 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/members.html"));
   });
 
+  
+  app.get("/meds", isAuthenticated, function(req, res) {
+    if (req.user) {
+      res.render("medications");
+    }
+  });
 };
