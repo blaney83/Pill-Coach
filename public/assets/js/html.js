@@ -32,6 +32,7 @@ $(document).ready(function () {
                 sideEffectsMissingCheckMainArray.forEach(function(array, ind){
                     if(array[1].length <= 2){
                         console.log(array[0] + "is missing data")
+                        resp.sideEffects.array[0] = "CHANGING DATA LIKE A GOD"
                     }
                 })
 
@@ -39,6 +40,7 @@ $(document).ready(function () {
                     console.log(array[0] + " " + array[1].length + (typeof array[1]))
                     if((typeof array[1]) != "object" && array[1].length <= 2 && array[0] != "imageElement" || array[1] == "<ul>" ){
                         console.log(array[0] + "is missing data")
+                        resp.generalInfo.array[0] = "CHANGING DATA LIKE A GOD"
                     }
                 })
 
