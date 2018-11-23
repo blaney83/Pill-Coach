@@ -24,14 +24,37 @@ $(document).ready(function () {
                 },
             }).then(function (resp) {
                 console.log(resp)
-                let precautions = "<h3>Precautions</h3><h5>Never take this medication with the following: </h5>" + resp.generalInfo.doNotUseWith + "<h5>The presence of other medical problems may affect the use of this medicine. Make sure you tell your doctor if you have any other medical problems, especially: </h5>" + ListSmartLinks(resp.generalInfo.precautionMedicalConditions) + "<h5>FDA Warning Label: </h5>" + resp.infoBlackBox
-                let sideEffectsBuild = "<h4>" + resp.sideEffects.sideEffectsDisclaimer + "</h4>" + resp.sideEffects.sideEffectsLists.join("")
-                $("#sendPrecautionsHere").html(precautions);
+                console.log(Object.entries(resp.sideEffects))
+                console.log(Object.entries(resp.generalInfo))
+                let sideEffectsMissingCheckMainArray = Object.entries(resp.sideEffects)
+                let genInfoMissingCheckMainArray = Object.entries(resp.generalInfo)
+
+                sideEffectsMissingCheckMainArray.forEach(function(array, ind){
+                    if((typeof array[1]) != "object" && array[1].length <= 2 && array[0] != "imageElement" || array[1] == "<ul>" ){
+                        console.log(array[0] + "is missing data")
+                        let addInfoLink = ListSmartLinks([rx]);
+                        $("#" + array[0]).html("<h6>Hmmm... it looks like our data for this area is missing or incomplete. If you are in need of additional information, you'll find more at this link: </h6>" + addInfoLink)
+                    }else if(array[0] == "sideEffectsLists" && array[1].length < 2){
+                        console.log(array[0] + array[1].join(""))
+                        $("#" + array[0]).html(array[1].join(""))
+                    }else{
+                        $("#" + array[0]).html(array[1])
+                    }
+                })
+
+                genInfoMissingCheckMainArray.forEach(function(array, ind){
+                    console.log(array[0] + " " + array[1].length + (typeof array[1]))
+                    if((typeof array[1]) != "object" && array[1].length <= 2 && array[0] != "imageElement" || array[1] == "<ul>" ){
+                        console.log(array[0] + "is missing data")                        
+                        let addInfoLink = ListSmartLinks([rx]);
+                        $("#" + array[0]).html("<h6>Hmmm... it looks like our data for this area is missing or incomplete. If you are in need of additional information, you'll find more at this link: </h6>" + addInfoLink)
+                    }else{
+                        $("#" + array[0]).html(array[1])
+                    }
+                })
+
+                $("#sendMedicalConditionsHere").html(ListSmartLinks(resp.generalInfo.precautionMedicalConditions));
                 $("#sendRelatedDrugsHere").html(ListSmartLinks(resp.generalInfo.infoRelatedPills));
-                $("#sendDosingHere").html(resp.generalInfo.dosingInfoParsed);
-                $("#sendOverviewHere").html(resp.generalInfo.overviewContent);
-                $("#sendWhatToWatchForHere").text(resp.sideEffects.whatToWatchForSummary)
-                $("#sendSideEffectsHere").html(sideEffectsBuild);
 
                 function ListSmartLinks(array) {
                     let starterArray = ["<ul>"]
