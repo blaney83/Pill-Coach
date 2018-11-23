@@ -31,6 +31,8 @@ padding: 20px
   text-align: center;
   color: white;
   margin-top: 30px;
+  font-family: 'Zniric';
+  font-size: 53px;
 
 }
 
@@ -191,3 +193,7 @@ margin-bottom: 20px;
     animation-name: fadeInRight;
 }
 
+@font-face {
+  font-family: 'Zniric';
+  src: url(../images/zrnic\ rg.ttf)
+}
