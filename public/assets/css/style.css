@@ -3,20 +3,19 @@ form.login {
   margin-top: 30px;
 }
 body {
-  background-color: rgba(255, 0, 0, 0.468);
+    background-image: url("https://www.xmple.com/wallpaper/orange-pink-gradient-linear-1920x1080-c2-f6be53-ed376d-a-90-f-14.svg")
 }
 .tile {
   height: 150px;
   width: 150px;
   margin: 10px auto;
   padding: 0;
-  /* background-image: url("https://images.unsplash.com/photo-1523245332310-ff40ff34a419?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=62d229e6b3ac54dfb1a674ef62c17c9c&auto=format&fit=crop&w=1650&q=80"); */
   background-size: cover;
-  /* background-color:grey; */
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, .3);
 }
 #tile-cont {
 background-color:rgba(255, 255, 255, .4);
+padding: 20px
 }
 #title {
   color: white;
@@ -24,13 +23,15 @@ background-color:rgba(255, 255, 255, .4);
 }
 #calendar {
   display: block;
-  margin-bottom: 40px;
+  margin: 40px auto ;
   text-align: center;
 }
 
 #calTitle {
   text-align: center;
   color: white;
+  margin-top: 30px;
+
 }
 
 .pillName {
@@ -38,6 +39,10 @@ background-color:rgba(255, 255, 255, .4);
   color: white; 
   width: 100%; 
   margin: 0;
+}
+
+.fc-scroller {
+  border-radius: 30px; 
 }
 
 .fc-left >h2 {
@@ -82,6 +87,7 @@ background-color:rgba(255, 255, 255, .4);
   font-weight:900;
   font-size:17px;
   letter-spacing: 0.045em;
+  margin-top: 40px;
 }
 
 .bttn svg {
@@ -91,7 +97,7 @@ background-color:rgba(255, 255, 255, .4);
 }
 
 .bttn svg rect {
-  //stroke: #EC0033;
+  stroke: rgb(234, 166, 50);
   stroke-width: 4;
   stroke-dasharray: 353, 0;
   stroke-dashoffset: 0;
@@ -101,9 +107,9 @@ background-color:rgba(255, 255, 255, .4);
 
 .bttn span{
 background: rgb(229, 243, 255);
-background: -moz-linear-gradient(left,  rgba(229, 243, 255,1) 0%, rgba(25, 107, 178,1) 100%);
-background: -webkit-linear-gradient(left,  rgba(229, 243, 255,1) 0%,rgba(25, 107, 178,1) 100%);
-background: linear-gradient(to right,  rgba(229, 243, 255,1) 0%,rgba(25, 107, 178,1) 100%);
+background: -moz-linear-gradient(left,  rgba(229, 243, 255,1) 0%, rgb(227, 186, 191) 100%);
+background: -webkit-linear-gradient(left,  rgba(229, 243, 255,1) 0%,rgba(227, 186, 191,1) 100%);
+background: linear-gradient(to right,  rgba(229, 243, 255,1) 0%,rgba(227, 186, 191,1) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E5F3FF', endColorstr='#196BB2',GradientType=1 );
 
 -webkit-background-clip: text;
@@ -119,3 +125,69 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E5F3FF', end
 .add-pill-div {
 margin-bottom: 20px;
 }
+
+.pageButton {
+  border-radius: 30px;
+  color: black; 
+  background-color: rgba(255, 255, 255, .5);
+  margin-top: 40px;
+
+}
+
+.fc-widget-content {
+  border-radius: 30px; 
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+  /** Basic styles for an animated element */
+.scene_element {
+    animation-duration: .7s;
+    transition-timing-function: ease-in-out;
+    animation-fill-mode: both;
+
+}
+
+.scene_element--fadein {
+    animation-name: fadeIn;
+}
+
+.scene_element--fadeinleft {
+    animation-name: fadeInLeft;
+}
+
+.scene_element--fadeinright {
+    animation-name: fadeInRight;
+}
+

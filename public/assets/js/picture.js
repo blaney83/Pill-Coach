@@ -23,5 +23,4 @@ $(document).ready(function () {
         
 
     })
-    // console.log($(".tile"));
 }) 
