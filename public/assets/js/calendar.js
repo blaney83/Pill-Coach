@@ -5,12 +5,16 @@ $(document).ready(function () {
 
     $('#calendar').fullCalendar({
         editable: true,
-        header: { center: 'month,listMonth' },
         color: 'black',     // an option!
         textColor: 'yellow', // an option! 
         selectable: true,
         contentHeight: 200,
-
+        default: "No events to display",
+        header: {
+            left: "prev",
+            center: 'listMonth,month',
+            right: "next"
+        },
 
         // buttons for switching between views
         defaultView: "listWeek",
