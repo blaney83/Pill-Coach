@@ -4,6 +4,7 @@
   "description": "Collab Application Repository",
   "main": "server.js",
   "dependencies": {
+    "axios": "^0.18.0",
     "bcrypt-nodejs": "0.0.3",
     "cheerio": "^1.0.0-rc.2",
     "cors": "^2.8.5",

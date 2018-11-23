@@ -1,83 +1,185 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+{{!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
     Demo Rx Info
+</button> --}}
+
+{{!-- Add new rx form --}}
+
+<button type="button" class="btn btn-primary change-title-pen" data-toggle="modal" data-target="#exampleModal">
+    <i class="tiny material-icons">Add Pill</i>
 </button>
 
-<!-- Calendar -->
-
-<h1 class="centered">Upcoming Doses</h1>
-
-<div id='calendar'></div>
-
-<!-- Modal -->
-
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-    aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add New Medication</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="card text-center">
-                    <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs">
-                            <li class="nav-item active">
-                                <a data-toggle="tab" class="nav-link active" href="#home">Active</a>
-                            </li>
-                            <li class="nav-item">
-                                <a data-toggle="tab" class="nav-link" href="#relatedMeds">Related Rx's</a>
-                            </li>
-                            <li class="nav-item">
-                                <a data-toggle="tab" class="nav-link" href="#dosing">Dosing</a>
-                            </li>
-                            <li class="nav-item">
-                                <a data-toggle="tab" class="nav-link" href="#precautions">Precautions</a>
-                            </li>
-                        </ul>
+            <form class="create-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Medication Name: </label>
+                        <input type="text" class="form-control new-title" id="name" placeholder="Ibuprofen">
                     </div>
-                    <div class="tab-content">
-                        <div id="home" class="tab-pane fade in card-body active show">
-                            <h5 class="card-title">General Information</h5>
-                            <p class="card-text" id="sendOverviewHere">With supporting text below as a natural lead-in
-                                to additional
-                                content.</p>
-                        </div>
-                        <div id="relatedMeds" class="tab-pane fade in card-body">
-                            <h5 class="card-title">Related Rx's</h5>
-                            <p class="card-text" id="sendRelatedDrugsHere">With supporting text below as a natural
-                                lead-in to additional
-                                content.</p>
-                        </div>
-                        <div id="dosing" class="tab-pane fade in card-body">
-                            <h5 class="card-title">Dosing</h5>
-                            <p class="card-text" id="sendDosingHere">With supporting text below as a natural lead-in to
-                                additional
-                                content.</p>
-                        </div>
-                        <div id="precautions" class="tab-pane fade in card-body">
-                            <h5 class="card-title">Precautions</h5>
-                            <p class="card-text" id="sendPrecautionsHere">With supporting text below as a natural
-                                lead-in to additional
-                                content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Quantity: </label>
+                        <input type="text" class="form-control new-quantity" id="name" placeholder="40">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Dosage: </label>
+                        <input type="text" class="form-control new-dosage" id="name" placeholder="800mg">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Frequency: </label>
+                        <input type="text" class="form-control new-frequency" id="name" placeholder="2 pills every 6 hours">
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back to Prescriptions</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary change-title">Save New Medication</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-<div class="container col-10" id="tile-cont">
-    <h2 id="title">Current Prescriptions</h2>
-    {{#each pills}}
-    {{> tiles}}
-    {{/each}}
+
+<!-- Calendar -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-lg-8">
+            <h1 id="calTitle">Upcoming Doses</h1>
+            <div class="d-flex justify-content-around add-pill-div">
+                <button class="container bttn" data-toggle="modal" data-target="#exampleModal">
+                    <svg width="277" height="62">
+                        <defs>
+                            <linearGradient id="grad1">
+                                <stop offset="0%" stop-color="#E5F3FF" />
+                                <stop offset="100%" stop-color="#196BB2" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="5" y="5" rx="25" fill="none" stroke="url(#grad1)" width="266" height="50"></rect>
+                    </svg>
+                    <span>Add Pill</span>
+                    </a>
+                </button>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div id='calendar'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col" id="tile-cont">
+            <h2 id="title">Current Prescriptions</h2>
+            <div class="row justify-content-center">
+                {{#each pills}}
+                {{> tiles}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio cumque vel repellendus
+                        voluptatibus qui odit ut ratione, laboriosam neque sapiente voluptatem non dolores facilis in
+                        dolore repudiandae officiis laborum nobis?</p>
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs">
+                                <li class="nav-item active">
+                                    <a data-toggle="tab" class="nav-link active" href="#home">Active</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a data-toggle="tab" class="nav-link" href="#relatedMeds">Related Rx's</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a data-toggle="tab" class="nav-link" href="#dosing">Dosing</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a data-toggle="tab" class="nav-link" href="#precautions">Precautions</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a data-toggle="tab" class="nav-link" href="#whatToWatchFor">Watch For</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a data-toggle="tab" class="nav-link" href="#sideEffects">Side-Effects</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div id="home" class="tab-pane fade in card-body active show">
+                                <h5 class="card-title">General Information</h5>
+                                <p class="card-text" id="overviewContent">With supporting text below as a natural
+                                    lead-in
+                                    to additional
+                                    content.</p>
+                            </div>
+                            <div id="relatedMeds" class="tab-pane fade in card-body">
+                                <h5 class="card-title">Related Rx's</h5>
+                                <p class="card-text" id="sendRelatedDrugsHere">With supporting text below as a
+                                    natural
+                                    lead-in to additional
+                                    content.</p>
+                            </div>
+                            <div id="dosing" class="tab-pane fade in card-body">
+                                <h5 class="card-title">Dosing</h5>
+                                <p class="card-text" id="dosingInfoParsed">With supporting text below as a natural
+                                    lead-in to
+                                    additional
+                                    content.</p>
+                            </div>
+                            <div id="precautions" class="tab-pane fade in card-body">
+                                <h5 class="card-title">Precautions</h5>
+                                <h6>Never take this medication with the following: </h6>
+                                <p class="card-text" id="doNotUseWith"></p>
+                                <h6>The presence of other medical problems may affect the use of this medicine. Make sure you tell your doctor if you have any other medical problems, especially: </h6>
+                                <p class="card-text" id="sendMedicalConditionsHere"></p>
+                                <h5>FDA Warning Label: </h5>
+                                <p class="card-text" id="infoBlackBox"></p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                            <div id="sideEffects" class="tab-pane fade in card-body">
+                                <h5 class="card-title">Side-Effects</h5>
+                                <h6>Along with its needed effects, a medicine may cause some unwanted effects. Although not all of these side effects may occur, if they do occur they may need medical attention.Check with your doctor immediately if any of the following side effects occur: </h6>
+                                <p class="card-text" id="sideEffectsLists"></p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                            <div id="whatToWatchFor" class="tab-pane fade in card-body">
+                                <h5 class="card-title">What To Watch For</h5>
+                                <p class="card-text" id="whatToWatchForSummary">With supporting text below as a
+                                    natural
+                                    lead-in to additional
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Back to Prescriptions</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>

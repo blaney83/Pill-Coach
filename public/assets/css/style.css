@@ -1,28 +1,121 @@
 form.signup,
 form.login {
-  margin-top: 50px;
+  margin-top: 30px;
+}
+body {
+  background-color: rgba(255, 0, 0, 0.468);
 }
 .tile {
-  margin: 10px;
   height: 150px;
-  background-color:grey;
+  width: 150px;
+  margin: 10px auto;
+  padding: 0;
+  /* background-image: url("https://images.unsplash.com/photo-1523245332310-ff40ff34a419?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=62d229e6b3ac54dfb1a674ef62c17c9c&auto=format&fit=crop&w=1650&q=80"); */
+  background-size: cover;
+  /* background-color:grey; */
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, .3);
 }
 #tile-cont {
-background-color:bisque;
+background-color:rgba(255, 255, 255, .4);
 }
 #title {
   color: white;
-  text-decoration-line: underline; 
-  text-decoration-color: aqua;
+  text-align: center; 
 }
 #calendar {
-  width: 80%;
-  height: 10%;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin-bottom: 40px;
+  text-align: center;
 }
 
-.centered {
+#calTitle {
   text-align: center;
+  color: white;
+}
+
+.pillName {
+  background-color: rgba(0, 0, 0, .5); 
+  color: white; 
+  width: 100%; 
+  margin: 0;
+}
+
+.fc-left >h2 {
+  font-size: 20px;
+  text-align: center;
+}
+
+.col-md-offset-3 >h2 {
+  text-align: center;
+}
+
+.form-control {
+  text-align: center;
+}
+
+.submitButton {
+  margin: 5px auto;
+}
+
+.middlePage {
+  margin-top: 200px;
+}
+.centered {
+  text-align: center
+}
+
+.bttn {
+  border: transparent;
+  position: relative;
+  display: inline-block;
+  width: 277px;
+  height: 50px;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 60px;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: transparent;
+  cursor: pointer;
+  text-decoration:none;
+  font-family: 'Roboto', sans-serif;
+  font-weight:900;
+  font-size:17px;
+  letter-spacing: 0.045em;
+}
+
+.bttn svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.bttn svg rect {
+  //stroke: #EC0033;
+  stroke-width: 4;
+  stroke-dasharray: 353, 0;
+  stroke-dashoffset: 0;
+  -webkit-transition: all 600ms ease;
+  transition: all 600ms ease;
+}
+
+.bttn span{
+background: rgb(229, 243, 255);
+background: -moz-linear-gradient(left,  rgba(229, 243, 255,1) 0%, rgba(25, 107, 178,1) 100%);
+background: -webkit-linear-gradient(left,  rgba(229, 243, 255,1) 0%,rgba(25, 107, 178,1) 100%);
+background: linear-gradient(to right,  rgba(229, 243, 255,1) 0%,rgba(25, 107, 178,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E5F3FF', endColorstr='#196BB2',GradientType=1 );
+
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.bttn:hover svg rect {
+  stroke-width: 4;
+  stroke-dasharray: 196, 543;
+  stroke-dashoffset: 437;
+}
+
+.add-pill-div {
+margin-bottom: 20px;
 }

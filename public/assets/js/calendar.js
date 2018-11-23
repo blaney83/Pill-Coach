@@ -7,8 +7,9 @@ $(document).ready(function () {
         editable: true,
         header: { center: 'month,listMonth' },
         color: 'black',     // an option!
-        textColor: 'yellow', // an option!
+        textColor: 'yellow', // an option! 
         selectable: true,
+        contentHeight: 200,
 
 
         // buttons for switching between views

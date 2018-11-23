@@ -1,7 +1,6 @@
 
 const cheerio = require("cheerio");
-const axios = require("axios");
-const db = require("../models")
+const axios = require("axios")
 
 module.exports = function (app) {
 
@@ -10,49 +9,6 @@ module.exports = function (app) {
         console.log(req.query.key)
 
         let input = req.query.key
-        console.log(input)
-
-        db.Rx.findOne({
-            where: {
-                rx_name: input
-            }
-        }).then(function (rxData) {
-            console.log("this means it found something..." + JSON.stringify(rxData))
-            if (rxData === null) {
-                console.log("this is working. This is where we would put the code to get new info.")
-                //this area is for code to run when we have never stored drug info in our DB yet for the drug thats being searched.
-                Promise.all(promiseCalls).then(response => {
-                    //this writes the drug to our db so its safe for us in the future.
-                    db.Rx.create({
-                        rx_name: input,
-                        side_effects: JSON.stringify(sideEffectsData),
-                        main_info: JSON.stringify(dataObj)
-                    }).then(function (result) {
-                        console.log("this is the db create result" + result.rx_name + result.side_effects);
-                    }).catch(function (err) {
-                        console.log("this is err catcher" + err);
-                    });
-
-                    let finalData = {
-                        generalInfo: response[1],
-                        sideEffects: response[0]
-                    };
-                    res.send(finalData)
-                })
-            } else {
-                console.log("here is where we would deconstruct our returned data and package it up for the response.")
-                //this is where code that will be run for things that we already have in our db.
-                let finalData = {
-                    generalInfo: JSON.parse(rxData.main_info.toString()),
-                    sideEffects: JSON.parse(rxData.side_effects.toString())
-                };
-                res.send(finalData)
-            }
-        }).catch(function (error) {
-            console.log("this is the err from the db search. Means doesnt exist." + error)
-
-        })
-
         let mainSearchURL = "https://www.goodrx.com/" + input + "/what-is?drug-name=" + input;
         let sideEffectsSearchURL = "https://www.goodrx.com/" + input + "/side-effects";
         let dataObj = {};
@@ -110,16 +66,15 @@ module.exports = function (app) {
 
                     constructSideEffectsLists(arrToTheFourth);
 
-                    sideEffectsData = {
+                    return (sideEffectsData = {
                         sideEffectsDisclaimer: sideEffectsDisclaimer,
                         whatToWatchForSummary: whatToWatchForSummary,
                         sideEffectsLists: sideEffectsLists,
                         messageToFutureSelf: "Hey there. Hope you're having a good day."
-                    }
-                    return (sideEffectsData)
+                    })
                 })
                 .catch(error => {
-                    console.log("this is an error with the side effects call" + error)
+                    console.log(error)
                 }),
 
             //request for getting general info
@@ -148,7 +103,7 @@ module.exports = function (app) {
                         let intermediateString = dosingContent.join("<ul>")
                         let anotherArray = intermediateString.split("&#x2014;")
                         finalReAssemblyArray.push("<ul>");
-                        finalReAssemblyArray.push(anotherArray.join("-"));
+                        finalReAssemblyArray.push(anotherArray.join("--"));
                         let returnProduct = finalReAssemblyArray.join("")
                         return (returnProduct);
                     }
@@ -186,7 +141,7 @@ module.exports = function (app) {
                     // console.log(precautionMedicalConditions)
                     // console.log(dosingInfoParsed)
 
-                    dataObj = {
+                    return (dataObj = {
                         carringtonsNameData: carringtonsNameData,
                         imageElement: imageElement,
                         infoRelatedPills: infoRelatedPills,
@@ -196,12 +151,21 @@ module.exports = function (app) {
                         precautionMedicalConditionsHeader: precautionMedicalConditionsHeader,
                         precautionMedicalConditions: precautionMedicalConditions,
                         dosingInfoParsed: dosingInfoParsed,
-                    }
-                    return (dataObj)
+                    })
                 })
                 .catch(error => {
-                    console.log("This is an error with the general data call" + error)
+                    console.log(error)
                 })
         ]
+
+        Promise.all(promiseCalls).then(response => {
+            console.log(response)
+            let finalData = {
+                generalInfo: response[1],
+                sideEffects: response[0]
+            };
+            res.send(finalData)
+        })
     })
 }
+
