@@ -52,6 +52,21 @@ module.exports = function (app) {
     }
   });
 
+  app.post("/api/user_pills", function(req, res) {
+    db.Pill.create({
+      rx_name: req.body.rx_name,
+      dosage: req.body.dosage,
+      quantity: req.body.quantity,
+      frequency_amount: req.body.frequency_amount,
+      frequency_time: req.body.frequency_time,
+      frequency_interval: req.body.frequency_interval,
+      initial_time: 0,
+      initial_date: 0
+    }).then(function() {
+      res.redirect("/");
+    })
+  })
+
   app.get("/api/upcoming_doses", function(req, res) {
     if (!req.user) {
       res.json({});
