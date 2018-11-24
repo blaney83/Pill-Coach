@@ -29,26 +29,26 @@ $(document).ready(function () {
                 let sideEffectsMissingCheckMainArray = Object.entries(resp.sideEffects)
                 let genInfoMissingCheckMainArray = Object.entries(resp.generalInfo)
 
-                sideEffectsMissingCheckMainArray.forEach(function(array, ind){
-                    if((typeof array[1]) != "object" && array[1].length <= 2 && array[0] != "imageElement" || array[1] == "<ul>" ){
+                sideEffectsMissingCheckMainArray.forEach(function (array, ind) {
+                    if ((typeof array[1]) != "object" && array[1].length <= 2 && array[0] != "imageElement" || array[1] == "<ul>") {
                         console.log(array[0] + "is missing data")
                         let addInfoLink = ListSmartLinks([rx]);
                         $("#" + array[0]).html("<h6>Hmmm... it looks like our data for this area is missing or incomplete. If you are in need of additional information, you'll find more at this link: </h6>" + addInfoLink)
-                    }else if(array[0] == "sideEffectsLists" && array[1].length < 2){
+                    } else if (array[0] == "sideEffectsLists" && array[1].length < 2) {
                         console.log(array[0] + array[1].join(""))
                         $("#" + array[0]).html(array[1].join(""))
-                    }else{
+                    } else {
                         $("#" + array[0]).html(array[1])
                     }
                 })
 
-                genInfoMissingCheckMainArray.forEach(function(array, ind){
+                genInfoMissingCheckMainArray.forEach(function (array, ind) {
                     console.log(array[0] + " " + array[1].length + (typeof array[1]))
-                    if((typeof array[1]) != "object" && array[1].length <= 2 && array[0] != "imageElement" || array[1] == "<ul>" ){
-                        console.log(array[0] + "is missing data")                        
+                    if ((typeof array[1]) != "object" && array[1].length <= 2 && array[0] != "imageElement" || array[1] == "<ul>") {
+                        console.log(array[0] + "is missing data")
                         let addInfoLink = ListSmartLinks([rx]);
                         $("#" + array[0]).html("<h6>Hmmm... it looks like our data for this area is missing or incomplete. If you are in need of additional information, you'll find more at this link: </h6>" + addInfoLink)
-                    }else{
+                    } else {
                         $("#" + array[0]).html(array[1])
                     }
                 })
@@ -65,7 +65,7 @@ $(document).ready(function () {
                         let linkTag = []
                         if (testInd > 0) {
                             linkTag.push(valArr.slice(0, testInd).join(""))
-                        }else{
+                        } else {
                             linkTag.push(valArr.join(""))
                         }
                         let arrArr = linkTag[0].split("")
@@ -94,9 +94,48 @@ $(document).ready(function () {
     });
 
     function checkPunctuation(val) {
-        if(val == ","|| val== "("|| val=="["|| val== "."|| val== "—"){
+        if (val == "," || val == "(" || val == "[" || val == "." || val == "—") {
             return true;
         }
     }
-})
-//current code for Modal ^^^^^^^^^^^^^^^^^^^^^
+    //current code for Modal ^^^^^^^^^^^^^^^^^^^^^
+    //* Below is for adding a pill
+
+    let newPillForm = $("form.pill-form")
+    let rxName = $("input#rx-name")
+    let dosage = $("input#dosage")
+    let quantity = $("input#quantity")
+    let freqAmount = $("input#freq-amt")
+    let freqTime = $("input#freq-time")
+    let freqInt = $("select#freq-int")
+
+    newPillForm.on("submit", function (event) {
+        event.preventDefault();
+        let pillData = {
+            rx_name: rxName.val().trim(),
+            dosage: dosage.val().trim(),
+            quantity: quantity.val().trim(),
+            frequency_amount: freqAmount.val().trim(),
+            frequency_time: freqTime.val().trim(),
+            frequency_interval: freqInt.val()
+        }
+        console.log(pillData)
+        console.log(pillData.rx_name)
+        addPill(pillData.rx_name, pillData.dosage, pillData.quantity, pillData.frequency_amount, pillData.frequency_time, pillData.frequency_interval)
+    })
+
+    function addPill(rx_name, dosage, quantity, frequency_amount, frequency_time, frequency_interval) {
+        $.post("/api/user_pills", {
+            rx_name: rx_name,
+            dosage: dosage,
+            quantity: quantity,
+            frequency_amount: frequency_amount,
+            frequency_time: frequency_time,
+            frequency_interval: frequency_interval
+        }).then(function (data) {
+            console.log(data.url)
+        }).catch(function(err) {
+            console.log(err);
+        })
+    }
+});

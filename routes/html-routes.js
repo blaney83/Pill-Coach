@@ -40,7 +40,13 @@ module.exports = function(app) {
   
   app.get("/meds", isAuthenticated, function(req, res) {
     if (req.user) {
-      res.render("medications");
+      db.Pill.findAll({})
+      .then(function(dbPill) {
+        let hbsObject = {
+          pills: dbPill
+      }
+        return res.render("medications", hbsObject);
+      });
     }
   });
 };
