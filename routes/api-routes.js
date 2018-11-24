@@ -62,6 +62,25 @@ module.exports = function (app) {
       frequency_interval: req.body.frequency_interval,
       initial_time: 0,
       initial_date: 0
+    }).then(function() {
+      res.redirect("/");
     })
   })
+
+  app.get("/api/upcoming_doses", function(req, res) {
+    if (!req.user) {
+      res.json({});
+    }
+    else {
+      res.json({
+        title: req.user.title,
+        start: req.user.start,
+        dosage: req.user.dosage,
+        quantity: req.user.quantity,
+        allDay: false
+      })
+    }
+  })
+
+  
 };
