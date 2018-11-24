@@ -12,12 +12,32 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        frequency: {
+        frequency_amount: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        image: {
-            type: DataTypes.STRING
+        frequency_time: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        frequency_interval: {
+            type: DataTypes.ENUM,
+            values: [
+                "HOUR",
+                "DAY",
+                "WEEK",
+                "MONTH"
+            ],
+            defaultValue: "HOUR",
+            allowNull: false
+        },
+        initial_time: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        initial_date: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     },
         {
