@@ -62,34 +62,44 @@ module.exports = function (app) {
       frequency_interval: req.body.frequency_interval,
       initial_time: 0,
       initial_date: 0
-    }).then(function() {
+    }).then(function(newPill) {
+      res.send(newPill);
       res.redirect("/");
     })
   })
 
   app.get("/api/upcoming_doses", function(req, res) {
     if (!req.user) {
+      db.Pill.findAll({
+        // where: {
+        //   userId: currentUserId,
+        // }
+      }).then(function(pillsArray) {
+        console.log(pillsArray);
+        res.json(pillsArray);
+      })
+    }
+    else {
+      throw err;
+    }
+
+  });
+  app.post("/api/upcoming_doses", function(req, res) {
+    if (!req.user) {
       res.json({});
     }
     else {
       res.json({
-        title: req.user.title,
-        start: req.user.start,
+        rx_name: req.user.rx_name,
+        start: req.user.initial_time + req.user.initial_date,
         dosage: req.user.dosage,
         quantity: req.user.quantity,
+        frequency_amount: req.body.frequency_amount,
+        frequency_time: req.body.frequency_time,
+        frequency_interval: req.body.frequency_interval,
         allDay: false
       })
     }
   });
-
-  app.post("/api/upcoming_doses", function(req, res) {
-    let event = {
-      title: req.user.title,
-      start: req.user.start,
-      dosage: req.user.dosage,
-      quantity: req.user.quantity,
-      allDay: false
-    }
-  })
   
 };

@@ -4,7 +4,33 @@ $(document).ready(function () {
     var d = date.getDay();
     var m = date.getMonth();
     var y = date.getFullYear();
+
+    $.ajax({
+        method: "GET",
+        url: '/api/user_pills',
+        dataType: 'json',
+        data: {
+            // our hypothetical feed requires UNIX timestamps
+            start: start.unix(),
+            end: end.unix()
+        }
+        // ,
+        // success: function (doc) {
+        //     var events = [];
+        //     $(doc).find('event').each(function () {
+        //         events.push({
+        //             title: $(this).attr('title'),
+        //             start: $(this).attr('start') // will be parsed
+        //         });
+        //     });
+        //     callback(events);
+        // }
+    }).then(function(resp) {
+        console.log(resp)
+    }) 
+
     
+
     // page is now ready, initialize the calendar...
 
     $('#calendar').fullCalendar({
@@ -12,7 +38,7 @@ $(document).ready(function () {
         // themeSystem: "jquery-ui",
         color: 'black',     // an option!
         textColor: 'orange', // an option!
-        backgroundColor: "red", 
+        backgroundColor: "red",
         selectable: true,
         editable: true,
         contentHeight: 200,
@@ -24,25 +50,25 @@ $(document).ready(function () {
         },
         customButtons: {
             addEventButton: {
-              text: 'Add a Pill',
-              textColor: 'orange',
-              click: function() {
-                var dateStr = prompt('Enter a date in YYYY-MM-DD format');
-                var date = moment(dateStr);
-      
-                if (date.isValid()) {
-                  $('#calendar').fullCalendar('renderEvent', {
-                    title: 'dynamic event', //Name of pill
-                    start: date, //date provided by user, in unix
-                    allDay: false
-                  });
-                  alert('Great. Now, update your database...');
-                } else {
-                  alert('Invalid date.');
+                text: 'Add a Pill',
+                textColor: 'orange',
+                click: function () {
+                    var dateStr = prompt('Enter a date in YYYY-MM-DD format');
+                    var date = moment(dateStr);
+
+                    if (date.isValid()) {
+                        $('#calendar').fullCalendar('renderEvent', {
+                            title: 'dynamic event', //Name of pill
+                            start: date, //date provided by user, in unix
+                            allDay: false
+                        });
+                        alert('Great. Now, update your database...');
+                    } else {
+                        alert('Invalid date.');
+                    }
                 }
-              }
             }
-          },
+        },
         // buttons for switching between views
         defaultView: "listDay",
         views: {
@@ -55,8 +81,12 @@ $(document).ready(function () {
             }
         },
 
+        events: function (start, end, timezone, callback) {
+
+        },
+
         events: [
-            
+
             {
                 title: 'Test',
                 // start: new Date(y, m, 23, 18, 30),
