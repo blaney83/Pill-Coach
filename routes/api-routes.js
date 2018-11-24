@@ -67,6 +67,19 @@ module.exports = function (app) {
     })
   })
 
+  app.delete("/api/user_pills", function(req, res) {
+    let deleteTarget = req.body.key
+    db.Pill.destroy({
+      where: {
+        rx_name: deleteTarget
+      }
+    }).then(function(results) {
+      res.json(deleteTarget)
+    }).catch(function(error){
+      console.log("delete error is " + error)
+    })
+  })
+
   app.get("/api/upcoming_doses", function(req, res) {
     if (!req.user) {
       res.json({});
