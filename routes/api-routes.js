@@ -51,4 +51,21 @@ module.exports = function (app) {
       });
     }
   });
+
+  app.get("/api/upcoming_doses", function(req, res) {
+    if (!req.user) {
+      res.json({});
+    }
+    else {
+      res.json({
+        title: req.user.title,
+        start: req.user.start,
+        dosage: req.user.dosage,
+        quantity: req.user.quantity,
+        allDay: false
+      })
+    }
+  })
+
+  
 };
