@@ -62,9 +62,21 @@ module.exports = function (app) {
       frequency_interval: req.body.frequency_interval,
       initial_time: 0,
       initial_date: 0
-    }).then(function(newPill) {
-      res.send(newPill);
-      res.redirect("/");
+    }).then(function() {
+      res.json({url: "/"});
+    })
+  })
+
+  app.delete("/api/user_pills", function(req, res) {
+    let deleteTarget = req.body.key
+    db.Pill.destroy({
+      where: {
+        rx_name: deleteTarget
+      }
+    }).then(function(results) {
+      res.json(deleteTarget)
+    }).catch(function(error){
+      console.log("delete error is " + error)
     })
   })
 

@@ -200,3 +200,15 @@ margin-bottom: 20px;
   font-family: 'Zniric';
   src: url(../images/zrnic\ rg.ttf)
 }
+
+.deleteButton {
+  background-color: rgba(0, 255, 255, 0.651);
+  border-radius: .1rem;
+  padding: .2rem;
+  position: absolute;
+  z-index: 5;
+  right: 0px;
+  top: 0px;
+  color: white;
+  font-weight: bolder;
+}

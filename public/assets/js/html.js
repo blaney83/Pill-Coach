@@ -11,6 +11,25 @@ $(document).ready(function () {
         $("#exampleModalLong").modal("toggle")
     })
 
+    $(document).on("click", ".deleteButton", function (event){
+        event.stopPropagation() 
+        event.isImmediatePropagationStopped() 
+        let clickTarget = event.target.id;
+        let nameArray = clickTarget.split("_");
+        let rx = nameArray.join(" ")
+
+        $.ajax({
+            method: "DELETE",
+            url: "/api/user_pills",
+            data: {
+                key: rx,
+            },
+        }).then(function(resp){
+            console.log(resp)
+            $("#" + resp).fadeOut(300, function(){ $(this).remove();});
+        })
+    })
+
     function getData(arr) {
         $(document).on("click", arr, function (event) {
             let rx = event.target.id;
@@ -122,6 +141,7 @@ $(document).ready(function () {
         console.log(pillData)
         console.log(pillData.rx_name)
         addPill(pillData.rx_name, pillData.dosage, pillData.quantity, pillData.frequency_amount, pillData.frequency_time, pillData.frequency_interval)
+        
     })
 
     function addPill(rx_name, dosage, quantity, frequency_amount, frequency_time, frequency_interval) {
@@ -134,6 +154,7 @@ $(document).ready(function () {
             frequency_interval: frequency_interval
         }).then(function (data) {
             console.log(data.url)
+            $("#pillModal").modal("toggle")
         }).catch(function(err) {
             console.log(err);
         })
