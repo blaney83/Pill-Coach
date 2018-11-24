@@ -65,7 +65,16 @@ module.exports = function (app) {
         allDay: false
       })
     }
-  })
+  });
 
+  app.post("/api/upcoming_doses", function(req, res) {
+    let event = {
+      title: req.user.title,
+      start: req.user.start,
+      dosage: req.user.dosage,
+      quantity: req.user.quantity,
+      allDay: false
+    }
+  })
   
 };

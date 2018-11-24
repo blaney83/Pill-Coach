@@ -18,7 +18,7 @@ module.exports = function(app) {
       }
         return res.render("index", hbsObject);
       });
-    }else
+    }else`````````````````` 
     res.sendFile(path.join(__dirname, "../public/login.html"));
   });
 
