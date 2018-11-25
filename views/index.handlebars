@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-around add-pill-div">
-            <button class="bttn" data-toggle="modal" data-target="#exampleModal">
+            <button class="bttn" data-toggle="modal" data-target="#pillModal">
                 <svg width="277" height="62">
                     <defs>
                         <linearGradient id="grad1">
@@ -37,8 +37,23 @@
         </div>
     </div>
 
+    {{!--
+
+    <section data-transition='wipe_left'>
+        <div class='center'>
+            <h1>Looks good!</h1>
+            <span>%section{'data-transition' => 'wipe_left'}</span>
+        </div>
+    </section>
+    <section data-transition='wipe_right'>
+        <div class='center'>
+            <h1>Feels good!</h1>
+            <span>%section{'data-transition' => 'wipe_right'}</span>
+        </div>
+    </section> --}}
+
     <!-- Modal for the add pill button -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="pillModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -48,28 +63,40 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="create-form">
+                <form class="pill-form">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Medication Name: </label>
-                            <input type="text" class="form-control new-title" id="name" placeholder="Ibuprofen">
+                            <input type="text" class="form-control new-title" id="rx-name" placeholder="Ibuprofen">
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Quantity: </label>
-                            <input type="text" class="form-control new-quantity" id="name" placeholder="40">
+                            <input type="text" class="form-control new-quantity" id="quantity" placeholder="40">
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Dosage: </label>
-                            <input type="text" class="form-control new-dosage" id="name" placeholder="800mg">
+                            <input type="text" class="form-control new-dosage" id="dosage" placeholder="800mg">
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Frequency: </label>
-                            <input type="text" class="form-control new-frequency" id="name" placeholder="2 pills every 6 hours">
+                            <label for="exampleFormControlInput1">Frequency Amount: </label>
+                            <input type="text" class="form-control new-dosage" id="freq-amt" placeholder="2">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Frequency timeframe: </label>
+                            <input type="text" class="form-control new-dosage" id="freq-time" placeholder="6">
+                        </div>
+                        <div class="form-group">
+                            <select id="freq-int" class="form-control">
+                                <option>Hour</option>
+                                <option>Day</option>
+                                <option>Week</option>
+                                <option>Month</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary change-title">Save New Medication</button>
+                        <button type="submit" id="new-pill" class="btn btn-primary change-title">Save New Medication</button>
                     </div>
                 </form>
             </div>

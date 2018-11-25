@@ -5,9 +5,11 @@ CREATE TABLE pills (
     rx_name VARCHAR(50) NOT NULL,
     dosage INT(5) NOT NULL, 
     quantity INT(5) NOT NULL, 
-    frequency INT(5) NOT NULL, 
-    d_w_m ENUM ("daily", "weekly", "monthly"),
-    image VARCHAR(1000)
+    frequency_amount INT(5) NOT NULL,
+    frequency_time INT(5) NOT NULL,
+    frequency_interval ENUM ("HOUR", "DAY", "WEEK", "MONTH"),
+    initial_time INT(5) NOT NULL,
+    initial_date INT(5) NOT NULL
 );
 
-INSERT INTO pills (rx_name, dosage, quantity, frequency, d_w_m) VALUES ("Lipitor", 10, 30, 2,"daily"), ("Dralzine", 25, 60, 2,"daily"), ("Vicodin", 5, 30, 1,"weekly");
+INSERT INTO pills (rx_name, dosage, quantity, frequency_amount, frequency_time, frequency_interval) VALUES ("Lipitor", 10, 30, 2, 1, "DAY"), ("Dralzine", 25, 60, 1, 1, "DAY"), ("Vicodin", 5, 30, 1, 6, "HOUR");

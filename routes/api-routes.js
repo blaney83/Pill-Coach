@@ -51,4 +51,49 @@ module.exports = function (app) {
       });
     }
   });
+
+  app.post("/api/user_pills", function(req, res) {
+    db.Pill.create({
+      rx_name: req.body.rx_name,
+      dosage: req.body.dosage,
+      quantity: req.body.quantity,
+      frequency_amount: req.body.frequency_amount,
+      frequency_time: req.body.frequency_time,
+      frequency_interval: req.body.frequency_interval,
+      initial_time: 0,
+      initial_date: 0
+    }).then(function() {
+      res.json({url: "/"});
+    })
+  })
+
+  app.delete("/api/user_pills", function(req, res) {
+    let deleteTarget = req.body.key
+    db.Pill.destroy({
+      where: {
+        rx_name: deleteTarget
+      }
+    }).then(function(results) {
+      res.json(deleteTarget)
+    }).catch(function(error){
+      console.log("delete error is " + error)
+    })
+  })
+
+  app.get("/api/upcoming_doses", function(req, res) {
+    if (!req.user) {
+      res.json({});
+    }
+    else {
+      res.json({
+        title: req.user.title,
+        start: req.user.start,
+        dosage: req.user.dosage,
+        quantity: req.user.quantity,
+        allDay: false
+      })
+    }
+  })
+
+  
 };
