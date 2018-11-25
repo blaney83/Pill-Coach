@@ -47,7 +47,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Add New Medication</h5>
                     </button>
                 </div>
-                <form class="pill-form">
+                <form class="pill-form" id={{key}}>
                     <div class="row justify-content-center">
                         <div class="modal-body col-8 centered">
                             <div class="form-group">
@@ -78,13 +78,15 @@
                                     <option>Month</option>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <input type="hidden" value={{key}} id="user-id">
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" id="new-pill" class="btn btn-primary change-title">Save New Medication</button>
                     </div>
-                </form>
             </div>
         </div>
     </div>
