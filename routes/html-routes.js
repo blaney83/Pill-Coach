@@ -21,7 +21,8 @@ module.exports = function (app) {
           let hbsObject = {
             key: req.user.id};
           return res.render("index", hbsObject);
-    } else
+    })
+   } else
       res.sendFile(path.join(__dirname, "../public/login.html"));
   });
 
