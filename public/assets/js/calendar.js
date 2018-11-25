@@ -7,7 +7,7 @@ $(document).ready(function () {
     var d = date.getDay();
     var m = date.getMonth();
     var y = date.getFullYear();
-    console.log(date)
+    console.log(date);
 
     function createPillEvents(pillObj) {
 
@@ -19,18 +19,44 @@ $(document).ready(function () {
             for (var i = 0; i <= duration; i + freqInterval) {
                 let eventTime = startTime + i;
 
-                createEvent(eventDate, eventTime, pillName)
+                createEvent(eventDate, eventTime, pillName);
             }
         };
 
         for (var i = 0; i <= daysOfEventsCreated; i++) {
-            let eventDate = pillObj.dateCreated + i()
+            let splitArray= pillObj.dateCreated.split("-");
+            let dayWithTime = array[2];
+            let anotherArray = dayWithTime.split("T");
+            let newDay = parseInt(anotherArray[0]) + i;
+            anotherArray.splice(0, 1, newDay);
+            let rebuiltDayTime = anotherArray.join("");
+            splitArray.splice(2, 1, rebuiltDayTime);
+            let newDateSting = splitArray.join("-");
+            let eventDate = newDateSting;
+
+            createOneDayOfEvents(eventDate, pillObj.freq, pillObj.freqInterval, pillObj.timeStarted, pillObj.name);
         }
+
+        // This is intended to increment one day based upon the date created
     }
+
+    // for (var pill in resp){
+
+    //     //pass the "pill" (which is an object containing all our info) to our function we defined above
+
+    //     createPillEvents(pill)
+
+    //     //and now we are done!
+
+    // }; 
+    
+    
+    // ^^^ do we need to push the events into the events array within this function?
+
+
 
     // page is now ready, initialize the calendar...
 
-    //these are our settings for the calendar. notice no events
     var calendarObject = {
         url: "#",
         // themeSystem: "jquery-ui",
@@ -89,7 +115,9 @@ $(document).ready(function () {
 });
 
 
-$(".submitButton").on("click", function () {
+
+
+$(document).ready(function () {
     $.ajax({
         method: "GET",
         url: '/api/user_pills',
