@@ -66,7 +66,7 @@ $(document).ready(function () {
 
                 genInfoMissingCheckMainArray.forEach(function (array, ind) {
                     // console.log(array[0] + " " + array[1].length + (typeof array[1]))
-                    if ( array[1] == null) {
+                    if ((typeof array[1]) != "object" && array[1].length <= 2 && array[0] != "imageElement" || array[1] == "<ul>" || array[1] == null) {
                         console.log(array[0] + "is missing data")
                         let addInfoLink = ListSmartLinks([rx]);
                         $("#" + array[0]).html("<h6>Hmmm... it looks like our data for this area is missing or incomplete. If you are in need of additional information, you'll find more at this link: </h6>" + addInfoLink)
