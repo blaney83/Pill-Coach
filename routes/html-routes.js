@@ -13,12 +13,16 @@ module.exports = function (app) {
     if (req.user) {
       db.Pill.findAll({})
         .then(function (dbPill) {
+          console.log(dbPill[0])
+          dbPill.forEach(function(pillObj){
+            let nameArray = pillObj.rx_name.split(" ")
+            pillObj.idString = nameArray.join("_")
+          })
           let hbsObject = {
-            pills: dbPill
-          }
+            key: req.user.id};
           return res.render("index", hbsObject);
-        });
-    } else
+    })
+   } else
       res.sendFile(path.join(__dirname, "../public/login.html"));
   });
 
@@ -34,7 +38,6 @@ module.exports = function (app) {
   app.get("/sign_up", function(req, res) {
     // If the user already has an account send them to the members page
     {res.sendFile(path.join(__dirname, "../public/signup.html"));}
-
   });
 
   // Here we've add our isAuthenticated middleware to this route.
@@ -46,7 +49,11 @@ module.exports = function (app) {
 
   app.get("/meds", isAuthenticated, function (req, res) {
     if (req.user) {
-      db.Pill.findAll({})
+      db.Pill.findAll({
+        where: {
+          UserId: req.user.id
+        },
+      })
         .then(function (dbPill) {
           console.log(dbPill[0])
           dbPill.forEach(function(pillObj){

@@ -13,13 +13,15 @@ $(document).ready(function() {
     };
 
     if (!userData.email || !userData.password) {
+      alert("Please enter an Email and Password");
       return;
+    }else{
+      
+      // If we have an email and password we run the loginUser function and clear the form
+      loginUser(userData.email, userData.password);
+      emailInput.val("");
+      passwordInput.val("");
     }
-
-    // If we have an email and password we run the loginUser function and clear the form
-    loginUser(userData.email, userData.password);
-    emailInput.val("");
-    passwordInput.val("");
   });
 
   // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
@@ -29,9 +31,11 @@ $(document).ready(function() {
       password: password
     }).then(function(data) {
       console.log(data.url)
+      console.log(data)
       window.location.replace(data.url);
       // If there's an error, log the error
     }).catch(function(err) {
+      alert("Sorry, looks like the email or password is incorrect or does not exist.")
       console.log(err);
     });
   }
