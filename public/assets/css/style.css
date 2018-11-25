@@ -7,23 +7,32 @@ body {
     background-attachment: fixed; 
     background-size: cover;
     background-position: center;
+
 }
 .tile {
   height: 150px;
   width: 150px;
   margin: 10px auto;
   padding: 0;
+  border-radius: 20px;
   background-size: cover;
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, .3);
 }
 #tile-cont {
-background-color:rgba(255, 255, 255, .4);
-padding: 20px
+  background-color:rgba(255, 255, 255, .4);
+  padding: 35px;
+  border-radius: 20px;
+
 }
 #title {
   color: white;
   text-align: center; 
+  font-family: 'Vonique';
+  font-size: 33px;
+  margin-left: -16px;
+  margin-right: -16px;
 }
+
 #calendar {
   display: block;
   margin: 40px auto ;
@@ -34,8 +43,8 @@ padding: 20px
   text-align: center;
   color: white;
   margin-top: 30px;
-  font-family: 'Zniric';
-  font-size: 53px;
+  font-family: 'Vonique';
+  font-size: 42px;
 
 }
 
@@ -47,7 +56,7 @@ padding: 20px
 }
 
 .fc-scroller {
-  border-radius: 30px; 
+  border-radius: 15px; 
 }
 
 .fc-left >h2 {
@@ -55,22 +64,19 @@ padding: 20px
   text-align: center;
 }
 
-.col-md-offset-3 >h2 {
-  text-align: center;
-}
-
-.form-control {
-  text-align: center;
-}
-
 .submitButton {
   margin: 5px auto;
+}
+
+.fc-unthemed td.fc-today {
+  background: #fcf8e3;
+  border-radius: 0px;
 }
 
 .middlePage {
   margin-top: 200px;
 }
-.centered {
+.centered, .form-control, .col-md-offset-3 >h2 {
   text-align: center
 }
 
@@ -139,9 +145,59 @@ margin-bottom: 20px;
 
 }
 
-.fc-widget-content {
-  border-radius: 30px; 
+.nav-item {
+  font-size: 16px;
+  color: white;
 }
+
+.nav-link {
+  color: white;
+}
+
+.card-body {
+  height: 275px;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, .5);
+  border-radius: 20px;
+}
+
+.card-header {
+  background-color: rgba(238,87,104,.7);
+  border-radius: 20px !important;
+  margin-bottom: 20px;
+}
+.card {
+  background-color: rgba(255, 255, 255, .3);
+  border-radius: 20px;
+}
+.fc-widget-content {
+  border-radius: 20px; 
+}
+
+.modal-content {
+  background-color: rgba(255, 255, 255, .8)
+}
+.modal-header, .modal-footer {
+  background-color: rgba(245, 160, 12, 0.824)
+}
+
+.modal-title {
+  color: white;
+}
+
+#overviewContent {
+  overflow-y: auto;
+  height: 110px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+
+
+}
+
+#new-pill {
+  background-color: rgba(238,87,104,1)
+}
+
 
 @keyframes fadeIn {
   0% {
@@ -197,18 +253,21 @@ margin-bottom: 20px;
 }
 
 @font-face {
-  font-family: 'Zniric';
-  src: url(../images/zrnic\ rg.ttf)
+  font-family: 'Vonique';
+  src: url(../images/Vonique\ 64\ Bold.ttf)
 }
 
 .deleteButton {
-  background-color: rgba(0, 255, 255, 0.651);
-  border-radius: .1rem;
+  background-color: rgba(40, 44, 46, 0.797);
+  border-radius: 7px;
   padding: .2rem;
+  padding-right: 9px;
+  padding-left: 9px;
   position: absolute;
+  font-size: 13px;
   z-index: 5;
-  right: 0px;
-  top: 0px;
+  right: 10px;
+  top: 8px;
   color: white;
   font-weight: bolder;
 }
