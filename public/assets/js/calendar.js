@@ -116,7 +116,7 @@ $(document).ready(function () {
         contentHeight: 200,
         noEventDefault: "No Pills Scheduled",
         header: {
-            left: "prev, next, today",
+            left: "prev, next",
             center: 'addEventButton',
             right: "listDay,month"
         },

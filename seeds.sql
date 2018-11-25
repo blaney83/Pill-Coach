@@ -8,8 +8,8 @@ CREATE TABLE pills (
     frequency_amount INT(5) NOT NULL,
     frequency_time INT(5) NOT NULL,
     frequency_interval ENUM ("HOUR", "DAY", "WEEK", "MONTH"),
-    initial_time INT(5) NOT NULL,
-    initial_date INT(5) NOT NULL
+    initial_time VARCHAR(10) NOT NULL,
+    initial_date VARCHAR(10) NOT NULL
 );
 
-INSERT INTO pills (rx_name, dosage, quantity, frequency_amount, frequency_time, frequency_interval) VALUES ("Lipitor", 10, 30, 2, 1, "DAY"), ("Dralzine", 25, 60, 1, 1, "DAY"), ("Vicodin", 5, 30, 1, 6, "HOUR");
+INSERT INTO pills (rx_name, dosage, quantity, frequency_amount, frequency_time, frequency_interval, initial_time, initial_date) VALUES ("Lipitor", 10, 30, 2, 1, "DAY", "2018-11-24", "T12:40:00"), ("Dralzine", 25, 60, 1, 1, "DAY", "2018-11-20", "T12:52:00"), ("Vicodin", 5, 30, 1, 6, "HOUR", "2018-11-25", "T12:52:00");

@@ -702,7 +702,9 @@ NOTE: use percentage font sizes or else old IE chokes
 /* List View
 --------------------------------------------------------------------------------------------------*/
 .fc-unthemed .fc-list-item:hover td {
-  background-color: #f5f5f5; }
+  background-color: #f5f5f5; 
+  border-radius: 0px;
+}
 
 /* Colors
 --------------------------------------------------------------------------------------------------*/
