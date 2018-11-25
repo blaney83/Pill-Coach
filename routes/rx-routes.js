@@ -231,7 +231,7 @@ module.exports = function (app) {
                         infoBlackBox: infoBlackBox,
                         overviewContent: overviewContent,
                         doNotUseWith: doNotUseWith,
-                        precautionMedicalConditionsHeader: precautionMedicalConditionsHeader,
+                        // precautionMedicalConditionsHeader: precautionMedicalConditionsHeader,
                         precautionMedicalConditions: precautionMedicalConditions,
                         dosingInfoParsed: dosingInfoParsed,
                     }

@@ -27,7 +27,8 @@ app.use(passport.session());
 // Requiring our routes
 require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
-require("./routes/rx-routes.js")(app);
+require("./scraper.js")(app);
+// require("./routes/rx-routes.js")(app);
 
 // Set Handlebars.
 let exphbs = require("express-handlebars");
@@ -37,6 +38,6 @@ app.set("view engine", "handlebars");
 
 db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
-    console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
+    // console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
   });
 });
