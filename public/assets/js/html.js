@@ -223,7 +223,12 @@ $(document).ready(function () {
             $("#pillModal").modal("toggle")
         }).catch(function(err) {
             console.log(err);
+        });
+
+        $.get("/meds").then(function(data){
+            window.location = "/meds"
         })
     }
 });
 
+    
