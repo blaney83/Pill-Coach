@@ -85,7 +85,7 @@ module.exports = function (app) {
     if (!req.user) {
       db.Pill.findAll({
         // where: {
-        //   userId: currentUserId,
+        //   UserId: req.body.UserId
         // }
       }).then(function(pillsArray) {
         console.log(pillsArray);
