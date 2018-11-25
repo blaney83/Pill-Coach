@@ -1,8 +1,49 @@
+$(document).ready(function () {
+    $.ajax({
+        method: "GET",
+        url: '/api/user_pills'
+        // dataType: 'json',
+        // data: {
+        //     // our hypothetical feed requires UNIX timestamps
+        //     start: start.unix(),
+        //     end: end.unix()
+        // }
+        // ,
+        // success: function (doc) {
+        //     var events = [];
+        //     $(doc).find('event').each(function () {
+        //         events.push({
+        //             title: $(this).attr('title'),
+        //             start: $(this).attr('start') // will be parsed
+        //         });
+        //     });
+        //     callback(events);
+        // }
+    }).then(function (resp) {
+        // console.log(resp)
+        createPillEvents(resp.Pill)
+    });
+});
 
+$(document).ready(function () {
+    $.ajax({
+        method: "POST",
+        url: "api/routes"
+    }).then(function (response) {
+        // console.log(response)
+
+        createPillEvents(response.Pill)
+
+        //and thats it!
+
+    });
+});
+
+let eventsArr = [];
 
 $(document).ready(function () {
 
-    
+
     var date = new Date();
     var d = date.getDay();
     var m = date.getMonth();
@@ -23,8 +64,10 @@ $(document).ready(function () {
             }
         };
 
+        let daysOfEventsCreated = pillObj.quantity/pillObj.freq;
+
         for (var i = 0; i <= daysOfEventsCreated; i++) {
-            let splitArray= pillObj.dateCreated.split("-");
+            let splitArray = pillObj.dateCreated.split("-");
             let dayWithTime = array[2];
             let anotherArray = dayWithTime.split("T");
             let newDay = parseInt(anotherArray[0]) + i;
@@ -40,17 +83,22 @@ $(document).ready(function () {
         // This is intended to increment one day based upon the date created
     }
 
+
+    //////This object loop is not working correctly. Still tinkering with it
+
+
     // for (var pill in resp){
 
     //     //pass the "pill" (which is an object containing all our info) to our function we defined above
 
     //     createPillEvents(pill)
+    //     eventsArr.push(pill)
 
     //     //and now we are done!
 
     // }; 
-    
-    
+
+
     // ^^^ do we need to push the events into the events array within this function?
 
 
@@ -89,7 +137,7 @@ $(document).ready(function () {
         {
             title: 'Test',
             // start: new Date(y, m, 23, 18, 30),
-            start: '2018-11-24T12:40:00',
+            start: '2018-11-25T12:40:00',
             dosage: "200 mg",
             quantity: "2",
             allDay: false
@@ -99,7 +147,7 @@ $(document).ready(function () {
     calendarObject.events.push(
         {
             title: 'Viagra',
-            start: '2018-11-24T12:52:00',
+            start: '2018-11-25T12:52:00',
             dosage: "200 mg",
             quantity: "2",
             allDay: false // will make the time show
@@ -110,38 +158,18 @@ $(document).ready(function () {
     $(document).ready(function () {
         //this is the function that you trigger to render your calendars. pass it your fully built calendar object and your good to go
         $('#calendar').fullCalendar(calendarObject);
-    })
-
-});
-
-
-
-
-$(document).ready(function () {
-    $.ajax({
-        method: "GET",
-        url: '/api/user_pills',
-        dataType: 'json',
-        data: {
-            // our hypothetical feed requires UNIX timestamps
-            start: start.unix(),
-            end: end.unix()
-        }
-        ,
-        success: function (doc) {
-            var events = [];
-            $(doc).find('event').each(function () {
-                events.push({
-                    title: $(this).attr('title'),
-                    start: $(this).attr('start') // will be parsed
-                });
-            });
-            callback(events);
-        }
-    }).then(function (resp) {
-        console.log(resp)
     });
+
 });
+
+
+
+
+
+
+
+
+
 
         // $(document).ready(function () {
 //     var date = new Date();
