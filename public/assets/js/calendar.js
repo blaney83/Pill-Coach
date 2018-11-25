@@ -142,6 +142,7 @@ $(document).ready(function () {
         console.log(resp)
     });
 });
+
         // $(document).ready(function () {
 //     var date = new Date();
 //     var d = date.getDay();
