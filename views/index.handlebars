@@ -53,8 +53,7 @@
     </section> --}}
 
     <!-- Modal for the add pill button -->
-    <div class="modal fade" id="pillModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="pillModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -63,7 +62,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="pill-form">
+                <form class="pill-form" id={{key}}>
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Medication Name: </label>
@@ -93,11 +92,14 @@
                                 <option>Month</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" id="new-pill" class="btn btn-primary change-title">Save New Medication</button>
-                    </div>
+                        <div class="form-group">
+                            <input type="hidden" value={{key}} id="user-id">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" id="new-pill" class="btn btn-primary change-title">Save New
+                                Medication</button>
+                        </div>
                 </form>
             </div>
         </div>

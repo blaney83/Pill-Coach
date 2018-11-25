@@ -11,13 +11,9 @@ module.exports = function (app) {
   app.get("/", function (req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
-      db.Pill.findAll({})
-        .then(function (dbPill) {
           let hbsObject = {
-            pills: dbPill
-          }
+            key: req.user.id};
           return res.render("index", hbsObject);
-        });
     } else
       res.sendFile(path.join(__dirname, "../public/login.html"));
   });
@@ -34,7 +30,6 @@ module.exports = function (app) {
   app.get("/sign_up", function(req, res) {
     // If the user already has an account send them to the members page
     {res.sendFile(path.join(__dirname, "../public/signup.html"));}
-
   });
 
   // Here we've add our isAuthenticated middleware to this route.
