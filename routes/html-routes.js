@@ -11,6 +11,13 @@ module.exports = function (app) {
   app.get("/", function (req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
+      db.Pill.findAll({})
+        .then(function (dbPill) {
+          console.log(dbPill[0])
+          dbPill.forEach(function(pillObj){
+            let nameArray = pillObj.rx_name.split(" ")
+            pillObj.idString = nameArray.join("_")
+          })
           let hbsObject = {
             key: req.user.id};
           return res.render("index", hbsObject);
