@@ -34,7 +34,7 @@
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content infoModal">
             <div class="modal-header justify-content-center">
                 <h5 class="modal-title" id="carringtonsNameData"></h5>
             </div>
@@ -44,59 +44,59 @@
                 <div class="text-center">
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs justify-content-center">
-                            <li class="nav-item">
+                            <li class="nav-item infoRelatedPills">
                                 <a data-toggle="tab" class="nav-link" href="#relatedMeds">Related Rx's</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item dosingInfoParsed">
                                 <a data-toggle="tab" class="nav-link" href="#dosing">Dosing</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item doNotUseWith precautionMedicalConditions infoBlackBox">
                                 <a data-toggle="tab" class="nav-link" href="#precautions">Precautions</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item whatToWatchForSummary">
                                 <a data-toggle="tab" class="nav-link" href="#whatToWatchFor">Watch For</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item sideEffectsLists">
                                 <a data-toggle="tab" class="nav-link" href="#sideEffects">Side-Effects</a>
                             </li>
                         </ul>
                     </div>
                     <div class="tab-content">
-                        <div id="relatedMeds" class="tab-pane fade in card-body">
+                        <div id="relatedMeds" class="tab-pane fade in card-body infoRelatedPills">
                             <h5 class="card-title">Related Rx's</h5>
-                            <p class="card-text" id="sendRelatedDrugsHere">With supporting text below as a
+                            <p class="card-text" id="infoRelatedPills">With supporting text below as a
                                 natural
                                 lead-in to additional
                                 content.</p>
                         </div>
-                        <div id="dosing" class="tab-pane fade in card-body">
+                        <div id="dosing" class="tab-pane fade in card-body dosingInfoParsed">
                             <h5 class="card-title">Dosing</h5>
                             <p class="card-text" id="dosingInfoParsed">With supporting text below as a natural
                                 lead-in to
                                 additional
                                 content.</p>
                         </div>
-                        <div id="precautions" class="tab-pane fade in card-body">
+                        <div id="precautions" class="tab-pane fade in card-body doNotUseWith precautionMedicalConditions infoBlackBox">
                             <h5 class="card-title">Precautions</h5>
                             <h6>Never take this medication with the following: </h6>
                             <p class="card-text" id="doNotUseWith"></p>
-                            <h6>The presence of other medical problems may affect the use of this medicine. Make sure
-                                you tell your doctor if you have any other medical problems, especially: </h6>
-                            <p class="card-text" id="sendMedicalConditionsHere"></p>
+                            <h6>The presence of other medical problems may affect the use of this medicine. Make
+                                sure you tell your doctor if you have any other medical problems, especially: </h6>
+                            <p class="card-text" id="precautionMedicalConditions"></p>
+                            {{!-- <div class="card-text" id="precautionMedicalConditions">testing</div> --}}
                             <h5>FDA Warning Label: </h5>
                             <p class="card-text" id="infoBlackBox"></p>
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
-                        <div id="sideEffects" class="tab-pane fade in card-body">
+                        <div id="sideEffects" class="tab-pane fade in card-body sideEffectsLists">
                             <h5 class="card-title">Side-Effects</h5>
-                            <h6>Along with its needed effects, a medicine may cause some unwanted effects. Although not
-                                all of these side effects may occur, if they do occur they may need medical
+                            <h6>Along with its needed effects, a medicine may cause some unwanted effects. Although
+                                not all of these side effects may occur, if they do occur they may need medical
                                 attention.Check with your doctor immediately if any of the following side effects
                                 occur: </h6>
                             <p class="card-text" id="sideEffectsLists"></p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
-                        <div id="whatToWatchFor" class="tab-pane fade in card-body active show">
+                        <div id="whatToWatchFor" class="tab-pane fade in card-body active show whatToWatchForSummary">
                             <h5 class="card-title">What To Watch For</h5>
                             <p class="card-text" id="whatToWatchForSummary">With supporting text below as a
                                 natural
