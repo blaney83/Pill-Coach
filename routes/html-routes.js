@@ -41,7 +41,11 @@ module.exports = function (app) {
 
   app.get("/meds", isAuthenticated, function (req, res) {
     if (req.user) {
-      db.Pill.findAll({})
+      db.Pill.findAll({
+        where: {
+          UserId: req.user.id
+        },
+      })
         .then(function (dbPill) {
           console.log(dbPill[0])
           dbPill.forEach(function(pillObj){
