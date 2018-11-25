@@ -7,11 +7,12 @@ module.exports = function (app) {
 
     app.get("/getinfo", function (req, res) {
 
-        console.log(req.query.key)
-
-        let clickTarget = req.query.key
-        let nameArray = clickTarget.split(" ");
+        console.log(req.query.key) 
+        let nameArray = req.query.key.split(" ");
+        console.log(nameArray)
+        //so to reference them in the db, we will make sure they are in the proper format
         let input = nameArray.join(" ")
+        console.log(input)
         let urlFirstVal = nameArray.join("-")
         let urlSecondVal = nameArray.join("+")
         console.log(input)
@@ -25,22 +26,33 @@ module.exports = function (app) {
                 console.log("this is working. This is where we would put the code to get new info.")
                 //this area is for code to run when we have never stored drug info in our DB yet for the drug thats being searched.
                 Promise.all(promiseCalls).then(response => {
-                    //this writes the drug to our db so its safe for us in the future.
-                    // db.Rx.create({
-                    //     rx_name: input,
-                    //     side_effects: JSON.stringify(sideEffectsData),
-                    //     main_info: JSON.stringify(dataObj)
-                    // }).then(function (result) {
-                    //     console.log("this is the db create result" + result.rx_name + result.side_effects);
-                    // }).catch(function (err) {
-                    //     console.log("this is err catcher" + err);
-                    // });
+                    if (response[0] == null && response[1] == null) {
 
-                    let finalData = {
-                        generalInfo: response[1],
-                        sideEffects: response[0]
-                    };
-                    res.send(finalData)
+                        console.log("that was a failed request")
+                        //send a bad response
+                        res.send(null)
+                    } else if (response[0] == null || response[1] == null) {
+                        //send a partial data response
+                    } else {
+
+                        console.log(response)
+                        //this writes the drug to our db so its safe for us in the future.
+                        // db.Rx.create({
+                        //     rx_name: input,
+                        //     side_effects: JSON.stringify(sideEffectsData),
+                        //     main_info: JSON.stringify(dataObj)
+                        // }).then(function (result) {
+                        //     console.log("this is the db create result" + result.rx_name + result.side_effects);
+                        // }).catch(function (err) {
+                        //     console.log("this is err catcher" + err);
+                        // });
+
+                        let finalData = {
+                            generalInfo: response[1],
+                            sideEffects: response[0]
+                        };
+                        res.send(finalData)
+                    }
                 })
             } else {
                 console.log("here is where we would deconstruct our returned data and package it up for the response.")
@@ -71,24 +83,21 @@ module.exports = function (app) {
                     //loads scrapped html
                     let $ = cheerio.load(response.data)
                     let sideEffectsDisclaimer = "Along with its needed effects, a medicine may cause some unwanted effects. Although not all of these side effects may occur, if they do occur they may need medical attention.Check with your doctor immediately if any of the following side effects occur:"
-                    let whatToWatchForSummary = $("div.xldag1-1.jexVRC > div:nth-child(1)").text();
+                    let whatToWatchForSummary = $("div.xldag1-1.jexVRC > div:nth-child(1)").html();
                     let allSideEffectInfo = $("div.xldag1-1.gmhNEZ > div").html();
                     // console.log(allSideEffectInfo)
+
+                    //these two variable will help determine if the page is in format #1 or format #2
                     let sfArr = allSideEffectInfo.split('</div>');
                     let liArr = allSideEffectInfo.split('</ul>');
-                    // console.log("this is sfArr")
-                    // console.log(sfArr)
-                    // console.log("this is sfArr type" + typeof sfArr)
-                    // console.log("this is liArr")
-                    // console.log(liArr)
-                    // console.log("this is liArr type" + typeof liArr)
                     let holderArr = [];
                     let arrToTheFourth = [];
                     let sideEffectsLists = [];
-
+                    console.log(sfArr.length)
+                    console.log(liArr.length)
                     //NEED TO BUILD A FUNCTION FOR SIDE EFFECTS THAT ARE STORED AS LIST ITEMS
                     if (sfArr.length > liArr.length) {
-
+                        //code if the page format is 1/2
                         sfArr.forEach(function (str) {
                             let arrArr = str.split('<p class="side_effect">')
                             console.log(arrArr)
@@ -127,10 +136,12 @@ module.exports = function (app) {
                         if (arrToTheFourth.length >= 1) {
                             constructSideEffectsLists(arrToTheFourth);
                         }
-                    }else{
-                        console.log(liArr)
+                    } else {
+                        //code if the page format is 2/2
+                        let stringVal = liArr.join("</ul>")
+                        sideEffectsLists.push(stringVal)
                     }
-
+                    console.log(sideEffectsLists)
                     sideEffectsData = {
                         sideEffectsDisclaimer: sideEffectsDisclaimer,
                         whatToWatchForSummary: whatToWatchForSummary,
@@ -141,6 +152,7 @@ module.exports = function (app) {
                 })
                 .catch(error => {
                     console.log("this is an error with the side effects call" + error)
+                    return (null)
                 }),
 
             //request for getting general info
@@ -150,8 +162,9 @@ module.exports = function (app) {
                 .then(response => {
                     //loads scraped html
                     let $ = cheerio.load(response.data)
+                    //drugs extended is extra info we can access later if we need to
                     let drugExtended = $("#uat-drug-info").text();
-                    let carringtonsNameData = $("#uat-drug-title > a").text();
+                    let carringtonsNameData = $("#uat-drug-title > a").html();
                     let imageElement = $("#uat-drug-image-link").html()
                     let infoRelatedPills = null;
                     // console.log($("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(2) > p:nth-child(1) > span").text() != null)
@@ -159,7 +172,19 @@ module.exports = function (app) {
                         infoRelatedPills = $("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(2) > p:nth-child(1) > span").text().split(", ");
                     }
                     let infoBlackBox = $("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(5)").text();
-                    let overviewContent = $("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(5) > div").text();
+                    //error handling overview logic
+                    let overviewContent = null
+                    if($("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(5) > div").text() == ""){
+                        //if overview is null, send extended
+                        overviewContent = $("#uat-drug-info").text();
+                    }else if($("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(5) > div").text() == "" && $("#uat-drug-info").text() == ""){
+                        //if no descriptions exist, send null
+                        overviewContent = null
+                    }else{
+                        //if overviewContent is fine, send it
+                        overviewContent = $("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(5) > div").text();
+                    }
+
                     let dosingContent = null;
                     // div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(10) > div > ul
                     if ($("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(10) > div > ul").html() != null) {
@@ -226,13 +251,13 @@ module.exports = function (app) {
                         return builderArray;
                     }
 
-                    // console.log(infoBlackBox)
-                    // console.log(infoRelatedPills)
-                    // console.log(overviewContent)
-                    // console.log("Definitely do not use with: " + doNotUseWith)
-                    // console.log(precautionMedicalConditionsHeader)
-                    // console.log(precautionMedicalConditions)
-                    // console.log(dosingInfoParsed)
+                    console.log(infoBlackBox)
+                    console.log(infoRelatedPills)
+                    console.log(overviewContent)
+                    console.log("Definitely do not use with: " + doNotUseWith)
+                    console.log(precautionMedicalConditionsHeader)
+                    console.log(precautionMedicalConditions)
+                    console.log(dosingInfoParsed)
 
                     dataObj = {
                         drugExtended: drugExtended,
@@ -250,6 +275,7 @@ module.exports = function (app) {
                 })
                 .catch(error => {
                     console.log("This is an error with the general data call" + error)
+                    return (null)
                 })
         ]
     })
