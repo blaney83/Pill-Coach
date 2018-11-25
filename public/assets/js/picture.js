@@ -4,7 +4,7 @@ let photoArr = ["/assets/images/01Pills.jpeg", "/assets/images/02Pills.jpeg","/a
 $(document).ready(function () {
     let backgroundPic;
     let count= 0;
-    console.log(photoArr)
+    // console.log(photoArr)
 
     $(".tile").each(function (index, elem) {
         let photo = photoArr[count];
@@ -14,7 +14,7 @@ $(document).ready(function () {
         
         if (count < photoArr.length){
             count++; 
-            console.log(count)
+            // console.log(count)
         }
         if(count === photoArr.length) {
             count = 0;
