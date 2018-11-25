@@ -63,7 +63,7 @@ module.exports = function (app) {
       initial_time: 0,
       initial_date: 0
     }).then(function() {
-      res.redirect("/");
+      res.json({url: "/"});
     })
   })
 
