@@ -80,7 +80,7 @@ module.exports = function (app) {
     })
   })
 
-  app.get("/api/upcoming_doses", function(req, res) {
+  app.get("/api/user_pills", function(req, res) {
     if (!req.user) {
       db.Pill.findAll({
         // where: {
@@ -91,9 +91,7 @@ module.exports = function (app) {
         res.json(pillsArray);
       })
     }
-    else {
-      throw err;
-    }
+
 
   });
   app.post("/api/upcoming_doses", function(req, res) {
