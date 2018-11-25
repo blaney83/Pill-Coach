@@ -125,7 +125,11 @@ $(document).ready(function () {
                         let genericGenerator = rx.split(" ");
                         let genericBrand = genericGenerator[0]
                         //this array holds all the strings to create supplementary links
-                        let linksArray = [rx, genericBrand]
+                        let linksArray = [rx]
+                        //if the medicine is multi-worded, create a second link
+                        if(genericGenerator.length > 1){
+                            linksArray.push(genericBrand)
+                        }
                         //for each missing selector, remove its related elements
                         missingDataSelectorArray.forEach(selector=>{
                             $("." + selector).css({display: "none"})
