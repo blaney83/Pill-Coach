@@ -5,6 +5,9 @@
             <a class="pageButton page-link" tabindex="-1">Previous</a>
         </li>
         <li class="page-item">
+            <a class="pageButton page-link centered" href="/logout">Sign-Out</a>
+        </li>
+        <li class="page-item">
             <a class="pageButton page-link" href="/meds">Next</a>
         </li>
     </ul>
@@ -36,54 +39,54 @@
         </div>
     </div>
 
-
     <!-- Modal for the add pill button -->
-    <div class="modal fade" id="pillModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="pillModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header justify-content-center">
                     <h5 class="modal-title" id="exampleModalLabel">Add New Medication</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="pill-form">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Medication Name: </label>
-                            <input type="text" class="form-control new-title" id="rx-name" placeholder="Ibuprofen">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Quantity: </label>
-                            <input type="text" class="form-control new-quantity" id="quantity" placeholder="40">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Dosage: </label>
-                            <input type="text" class="form-control new-dosage" id="dosage" placeholder="800mg">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Frequency Amount: </label>
-                            <input type="text" class="form-control new-dosage" id="freq-amt" placeholder="2">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Frequency timeframe: </label>
-                            <input type="text" class="form-control new-dosage" id="freq-time" placeholder="6">
-                        </div>
-                        <div class="form-group">
-                            <select id="freq-int" class="form-control">
-                                <option>Hour</option>
-                                <option>Day</option>
-                                <option>Week</option>
-                                <option>Month</option>
-                            </select>
+                <form class="pill-form" id={{key}}>
+                    <div class="row justify-content-center">
+                        <div class="modal-body col-8 centered">
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Name </label>
+                                <input type="text" class="form-control new-title" id="rx-name" placeholder="Ibuprofen">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Quantity</label>
+                                <input type="text" class="form-control new-quantity" id="quantity" placeholder="40">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Dosage</label>
+                                <input type="text" class="form-control new-dosage" id="dosage" placeholder="800mg">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Frequency Amount</label>
+                                <input type="text" class="form-control new-dosage" id="freq-amt" placeholder="2">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Frequency Timeframe</label>
+                                <input type="text" class="form-control new-dosage" id="freq-time" placeholder="6">
+                            </div>
+                            <div class="form-group">
+                                <select id="freq-int" class="form-control">
+                                    <option>Hour</option>
+                                    <option>Day</option>
+                                    <option>Week</option>
+                                    <option>Month</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" value={{key}} id="user-id">
+                            </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" id="new-pill" class="btn btn-primary change-title">Save New Medication</button>
                     </div>
-                </form>
             </div>
         </div>
     </div>

@@ -193,6 +193,7 @@ $(document).ready(function () {
     let freqAmount = $("input#freq-amt")
     let freqTime = $("input#freq-time")
     let freqInt = $("select#freq-int")
+    let UserId = $("input#user-id")
 
     newPillForm.on("submit", function (event) {
         event.preventDefault();
@@ -202,28 +203,35 @@ $(document).ready(function () {
             quantity: quantity.val().trim(),
             frequency_amount: freqAmount.val().trim(),
             frequency_time: freqTime.val().trim(),
-            frequency_interval: freqInt.val()
+            frequency_interval: freqInt.val(),
+            UserId: UserId.val()
         }
         console.log(pillData)
         console.log(pillData.rx_name)
-        addPill(pillData.rx_name, pillData.dosage, pillData.quantity, pillData.frequency_amount, pillData.frequency_time, pillData.frequency_interval)
+        addPill(pillData.rx_name, pillData.dosage, pillData.quantity, pillData.frequency_amount, pillData.frequency_time, pillData.frequency_interval, pillData.UserId)
         
     })
 
-    function addPill(rx_name, dosage, quantity, frequency_amount, frequency_time, frequency_interval) {
+    function addPill(rx_name, dosage, quantity, frequency_amount, frequency_time, frequency_interval, UserId) {
         $.post("/api/user_pills", {
             rx_name: rx_name,
             dosage: dosage,
             quantity: quantity,
             frequency_amount: frequency_amount,
             frequency_time: frequency_time,
-            frequency_interval: frequency_interval
+            frequency_interval: frequency_interval,
+            UserId: UserId
         }).then(function (data) {
             console.log(data.url)
             $("#pillModal").modal("toggle")
         }).catch(function(err) {
             console.log(err);
+        });
+
+        $.get("/meds").then(function(data){
+            window.location = "/meds"
         })
     }
 });
 
+    
