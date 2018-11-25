@@ -27,7 +27,7 @@ app.use(passport.session());
 // Requiring our routes
 require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
-require("./scraper.js")(app);
+require("./routes/rx-routes.js")(app);
 // require("./routes/rx-routes.js")(app);
 
 // Set Handlebars.
