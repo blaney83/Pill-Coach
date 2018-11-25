@@ -13,6 +13,11 @@ module.exports = function (app) {
     if (req.user) {
       db.Pill.findAll({})
         .then(function (dbPill) {
+          console.log(dbPill[0])
+          dbPill.forEach(function(pillObj){
+            let nameArray = pillObj.rx_name.split(" ")
+            pillObj.idString = nameArray.join("_")
+          })
           let hbsObject = {
             pills: dbPill
           }

@@ -9,7 +9,11 @@ module.exports = function (app) {
 
         console.log(req.query.key)
 
-        let input = req.query.key
+        let clickTarget = req.query.key
+        let nameArray = clickTarget.split(" ");
+        let input = nameArray.join(" ")
+        let urlFirstVal = nameArray.join("-")
+        let urlSecondVal = nameArray.join("+")
         console.log(input)
 
         db.Rx.findOne({
@@ -17,21 +21,20 @@ module.exports = function (app) {
                 rx_name: input
             }
         }).then(function (rxData) {
-            console.log("this means it found something..." + JSON.stringify(rxData))
             if (rxData === null) {
                 console.log("this is working. This is where we would put the code to get new info.")
                 //this area is for code to run when we have never stored drug info in our DB yet for the drug thats being searched.
                 Promise.all(promiseCalls).then(response => {
                     //this writes the drug to our db so its safe for us in the future.
-                    db.Rx.create({
-                        rx_name: input,
-                        side_effects: JSON.stringify(sideEffectsData),
-                        main_info: JSON.stringify(dataObj)
-                    }).then(function (result) {
-                        console.log("this is the db create result" + result.rx_name + result.side_effects);
-                    }).catch(function (err) {
-                        console.log("this is err catcher" + err);
-                    });
+                    // db.Rx.create({
+                    //     rx_name: input,
+                    //     side_effects: JSON.stringify(sideEffectsData),
+                    //     main_info: JSON.stringify(dataObj)
+                    // }).then(function (result) {
+                    //     console.log("this is the db create result" + result.rx_name + result.side_effects);
+                    // }).catch(function (err) {
+                    //     console.log("this is err catcher" + err);
+                    // });
 
                     let finalData = {
                         generalInfo: response[1],
@@ -53,8 +56,9 @@ module.exports = function (app) {
 
         })
 
-        let mainSearchURL = "https://www.goodrx.com/" + input + "/what-is?drug-name=" + input;
-        let sideEffectsSearchURL = "https://www.goodrx.com/" + input + "/side-effects";
+        let mainSearchURL = "https://www.goodrx.com/" + urlFirstVal + "/what-is?drug-name=" + urlSecondVal;
+        console.log(mainSearchURL)
+        let sideEffectsSearchURL = "https://www.goodrx.com/" + urlFirstVal + "/side-effects";
         let dataObj = {};
         let sideEffectsData = {}
 
@@ -69,16 +73,20 @@ module.exports = function (app) {
                     let sideEffectsDisclaimer = "Along with its needed effects, a medicine may cause some unwanted effects. Although not all of these side effects may occur, if they do occur they may need medical attention.Check with your doctor immediately if any of the following side effects occur:"
                     let whatToWatchForSummary = $("div.xldag1-1.jexVRC > div:nth-child(1)").text();
                     let allSideEffectInfo = $("div.xldag1-1.gmhNEZ > div").html();
+                    // console.log(allSideEffectInfo)
                     let sfArr = allSideEffectInfo.split('</div>');
+                    console.log(sfArr)
                     let holderArr = [];
                     let arrToTheFourth = [];
                     let sideEffectsLists = [];
 
+                    //NEED TO BUILD A FUNCTION FOR SIDE EFFECTS THAT ARE STORED AS LIST ITEMS
                     sfArr.forEach(function (str) {
                         let arrArr = str.split('<p class="side_effect">')
-                        if (arrArr.length >= 2) {
+                        console.log(arrArr)
+                        // if (arrArr.length >= 2) {
                             holderArr.push(arrArr)
-                        }
+                        // }
                     });
 
                     holderArr.forEach(function (arr) {
@@ -107,8 +115,10 @@ module.exports = function (app) {
                             sideEffectsLists.push(finishedListHtml)
                         });
                     };
-
-                    constructSideEffectsLists(arrToTheFourth);
+                    console.log(arrToTheFourth)
+                    if(arrToTheFourth.length >= 1){
+                        constructSideEffectsLists(arrToTheFourth);
+                    }
 
                     sideEffectsData = {
                         sideEffectsDisclaimer: sideEffectsDisclaimer,
@@ -127,22 +137,47 @@ module.exports = function (app) {
                 .get(mainSearchURL)
 
                 .then(response => {
-
-                    //loads scrapped html
+                    //loads scraped html
                     let $ = cheerio.load(response.data)
+                    let drugExtended = $("#uat-drug-info").text();
                     let carringtonsNameData = $("#uat-drug-title > a").text();
                     let imageElement = $("#uat-drug-image-link").html()
-                    let infoRelatedPills = $("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(2) > p:nth-child(1) > span").text().split(", ");
+                    let infoRelatedPills = null;
+                    // console.log($("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(2) > p:nth-child(1) > span").text() != null)
+                    if($("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(2) > p:nth-child(1) > span").text() != null){
+                        infoRelatedPills = $("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(2) > p:nth-child(1) > span").text().split(", ");
+                    }
                     let infoBlackBox = $("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(5)").text();
-                    let overviewContent = $("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(8) > div").text();
-                    let dosingContent = $("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(12)").html().split("<ul>");
+                    let overviewContent = $("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(5) > div").text();
+                    let dosingContent = null;
+                    // div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(10) > div > ul
+                    if($("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(10) > div > ul").html() != null){
+                        dosingContent = $("div._2rANW1lgQ9bqbo49JhQeTK > div > div ul").html().split("<ul>");
+                    }
                     let doNotUseWith = $("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(28) > div > ul:nth-child(3)").text();
                     let precautionMedicalConditionsHeader = "The presence of other medical problems may affect the use of this medicine. Make sure you tell your doctor if you have any other medical problems, especially:"
-                    let pmc = $("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(32) > div").text().split(":")
-                    let dosingInfoParsed = parseDosingContent();
-                    let precautionMedicalConditions = handleConditionsData();
-
+                    let pmc = null;
+                    
+                    // console.log($("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(32) > div").text())
+                    if($("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(32) > div").text() != null){
+                        pmc = $("div._2rANW1lgQ9bqbo49JhQeTK > div > div > div:nth-child(32) > div").text().split(":")
+                    }
+                    let dosingInfoParsed = null
+                    // console.log(dosingContent != null)
+                    if(dosingContent != null){
+                        dosingInfoParsed = parseDosingContent();
+                    }
+                    // console.log(dosingInfoParsed)
+                    let precautionMedicalConditions = null;
+                    // console.log(pmc != null)
+                    // console.log("2" + pmc)
+                    // console.log(pmc.length)
+                    if(pmc != null && pmc.length >= 3 ){
+                        precautionMedicalConditions = handleConditionsData();
+                    }
+                    // console.log("market:" + precautionMedicalConditions)
                     function parseDosingContent() {
+                        console.log("parseDosingContent is firing")
                         let finalReAssemblyArray = [];
                         dosingContent.splice(0, 1);
                         let intermediateString = dosingContent.join("<ul>")
@@ -154,7 +189,9 @@ module.exports = function (app) {
                     }
 
                     function handleConditionsData() {
+                        console.log("handleConditionsData is firing")
                         let builderArray = [];
+                        // console.log(pmc[1])
                         let pmc2 = pmc[1].split(" or")
                         for (let i = 0; i < pmc2.length; i++) {
                             let checkSpaceArr = pmc2[i].split("")
@@ -187,6 +224,7 @@ module.exports = function (app) {
                     // console.log(dosingInfoParsed)
 
                     dataObj = {
+                        drugExtended: drugExtended,
                         carringtonsNameData: carringtonsNameData,
                         imageElement: imageElement,
                         infoRelatedPills: infoRelatedPills,
