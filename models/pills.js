@@ -31,13 +31,14 @@ module.exports = function (sequelize, DataTypes) {
             defaultValue: "HOUR",
             allowNull: false
         },
-        initial_time: {
-            type: DataTypes.INTEGER,
+        initial_date: {
+            type: DataTypes.DATE,
             allowNull: false
         },
-        initial_date: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+        start_time: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "08"
         }
     },
         {
