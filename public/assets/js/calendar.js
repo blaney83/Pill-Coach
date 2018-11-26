@@ -10,7 +10,7 @@ function createPillEvents(pillObj) {
 
         for (var i = 0; i <= daysOfEventsCreated; i++) {
             console.log("this is firing" + pillObj)
-            let missingT = pillObj.initial_time.split(" ");
+            let missingT = pillObj.initial_date.split(" ");
             let fullCalFormat = missingT.join("T")
             let splitArray = fullCalFormat.split("-");
             let dayWithTime = splitArray[2];

@@ -199,9 +199,13 @@ $(document).ready(function () {
     let freqTime = $("input#freq-time")
     let freqInt = $("select#freq-int")
     let UserId = $("input#user-id")
+    let initTime = $("select#init-time")
 
     newPillForm.on("submit", function (event) {
         event.preventDefault();
+
+        let time = initTime.val()
+
         let pillData = {
             rx_name: rxName.val().trim(),
             dosage: dosage.val().trim(),
@@ -209,15 +213,16 @@ $(document).ready(function () {
             frequency_amount: freqAmount.val().trim(),
             frequency_time: freqTime.val().trim(),
             frequency_interval: freqInt.val(),
+            initial_time: time.slice(0,2),
             UserId: UserId.val()
         }
         console.log(pillData)
         console.log(pillData.rx_name)
-        addPill(pillData.rx_name, pillData.dosage, pillData.quantity, pillData.frequency_amount, pillData.frequency_time, pillData.frequency_interval, pillData.UserId)
+        addPill(pillData.rx_name, pillData.dosage, pillData.quantity, pillData.frequency_amount, pillData.frequency_time, pillData.frequency_interval, pillData.initial_time, pillData.UserId)
         
     })
 
-    function addPill(rx_name, dosage, quantity, frequency_amount, frequency_time, frequency_interval, UserId) {
+    function addPill(rx_name, dosage, quantity, frequency_amount, frequency_time, frequency_interval, initial_time,UserId) {
         $.post("/api/user_pills", {
             rx_name: rx_name,
             dosage: dosage,
@@ -225,6 +230,7 @@ $(document).ready(function () {
             frequency_amount: frequency_amount,
             frequency_time: frequency_time,
             frequency_interval: frequency_interval,
+            initial_time: initial_time,
             UserId: UserId
         }).then(function (data) {
             console.log(data.url)

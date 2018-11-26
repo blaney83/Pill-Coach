@@ -51,11 +51,11 @@
                     <div class="row justify-content-center">
                         <div class="modal-body col-8 centered">
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Name </label>
+                                <label for="exampleFormControlInput1">Name</label>
                                 <input type="text" class="form-control new-title" id="rx-name" placeholder="Ibuprofen">
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Quantity</label>
+                                <label for="exampleFormControlInput1">Prescription Quantity</label>
                                 <input type="text" class="form-control new-quantity" id="quantity" placeholder="40">
                             </div>
                             <div class="form-group">
@@ -63,19 +63,30 @@
                                 <input type="text" class="form-control new-dosage" id="dosage" placeholder="800mg">
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Frequency Amount</label>
+                                <label for="exampleFormControlInput1">Amount to Take</label>
                                 <input type="text" class="form-control new-dosage" id="freq-amt" placeholder="2">
                             </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlInput1">Frequency Timeframe</label>
-                                <input type="text" class="form-control new-dosage" id="freq-time" placeholder="6">
+                            <div class="form-row">
+                                <div class="col-12">
+                                <label for="exampleFormControlInput1">Frequency to be taken</label>
+                                </div>
+                                <div class="form-group col-5">
+                                    <input type="text" class="form-control new-dosage" id="freq-time" placeholder="6">
+                                </div>
+                                <label> Per </label>
+                                <div class="form-group col-5">
+                                    <select id="freq-int" class="form-control">
+                                        <option>Hour</option>
+                                        <option>Day</option>
+                                        <option>Week</option>
+                                        <option>Month</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <select id="freq-int" class="form-control">
-                                    <option>Hour</option>
-                                    <option>Day</option>
-                                    <option>Week</option>
-                                    <option>Month</option>
+                                <label for="exampleFormControlInput1">Start Time</label>
+                                <select id="init-time" class="form-control">
+                                    {{> addPill}}
                                 </select>
                             </div>
                             <div class="form-group">
