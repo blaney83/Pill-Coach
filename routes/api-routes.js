@@ -60,8 +60,8 @@ module.exports = function (app) {
       frequency_amount: req.body.frequency_amount,
       frequency_time: req.body.frequency_time,
       frequency_interval: req.body.frequency_interval,
-      initial_time: Date(),
-      // initial_date: 0,
+      initial_date: Date(),
+      start_time: req.body.initial_time,
       UserId: req.body.UserId
     }).then(function() {
       res.json({url: "/"});

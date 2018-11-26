@@ -31,7 +31,7 @@ module.exports = function (sequelize, DataTypes) {
             defaultValue: "HOUR",
             allowNull: false
         },
-        initial_time: {
+        initial_date: {
             type: DataTypes.DATE,
             allowNull: false
         },
