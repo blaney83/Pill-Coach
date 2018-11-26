@@ -254,27 +254,6 @@ $(document).ready(function () {
                 center: 'addEventButton',
                 right: "listDay,month"
             },
-            customButtons: {
-                addEventButton: {
-                    text: 'Add a Pill',
-                    textColor: 'orange',
-                    click: function () {
-                        var dateStr = prompt('Enter a date in YYYY-MM-DD format');
-                        var date = moment(dateStr);
-
-                        if (date.isValid()) {
-                            $('#calendar').fullCalendar('renderEvent', {
-                                title: 'dynamic event', //Name of pill
-                                start: date, //date provided by user, in unix
-                                allDay: false
-                            });
-                            alert('Great. Now, update your database...');
-                        } else {
-                            alert('Invalid date.');
-                        }
-                    }
-                }
-            },
             defaultView: "listDay",
             views: {
                 month: { // name of view
@@ -315,42 +294,48 @@ $(document).ready(function () {
             let eventsArr = [];
             let eventsPromise = new Promise(function (resolve, reject) {
                 let daysOfEventsCreated = pillObj.quantity / pillObj.frequency_amount;
-                for (var i = 0; i <= daysOfEventsCreated; i++) {
-                    console.log("this is firing" + pillObj)
-                    let missingT = pillObj.initial_date.split(" ");
-                    let fullCalFormat = missingT.join("T")
-                    let splitArray = fullCalFormat.split("-");
-                    let dayWithTime = splitArray[2];
-                    let anotherArray = dayWithTime.split("T");
-                    let newDay = parseInt(anotherArray[0]) + i;
-                    anotherArray.splice(0, 1, newDay);
-                    let rebuiltDayTime = anotherArray.join("T");
-                    splitArray.splice(2, 1, rebuiltDayTime);
-                    let newDateSting = splitArray.join("-");
-                    let eventDate = newDateSting;
-                    createOneDayOfEvents(eventDate, pillObj.frequency_amount, pillObj.frequency_time, pillObj.start_time, pillObj.rx_name);
+                for (var xyz = 0; xyz <= daysOfEventsCreated; xyz++) {
+                    let runningLow = false;
+                    if(daysOfEventsCreated-xyz<=3){
+                        runningLow = true;
+                    }
+                    let operatorDate = moment().utc(pillObj.initial_date).add(xyz, 'days');
+                    let eventDate = moment(operatorDate._d).utc().format()
+                    console.log(eventDate)
+                    createOneDayOfEvents(eventDate, pillObj.frequency_amount, pillObj.frequency_time, pillObj.start_time, pillObj.rx_name, runningLow);
                 };
 
-                function createOneDayOfEvents(eventDate, freq, freqInterval, startTime, pillName) {
+                function createOneDayOfEvents(eventDate, freq, freqInterval, startTime, pillName, runningLow) {
                     let duration = (freq * freqInterval);
-                    for (var i = 0; i < duration;) {
+                    for (var z = 0; z < duration;) {
 
                         let unixArray = eventDate.split("T")
                         let timeArray = unixArray[1].split(":")
-                        let eventTime = parseInt(startTime) + i;
+                        let eventTime = parseInt(startTime) + z;
                         timeArray.splice(0, 1, eventTime)
                         let timeString = timeArray.join(":")
                         unixArray.splice(1, 1, timeString)
                         let intermediate = unixArray.join("T")
                         let anotherDangArray = intermediate.split(".")
                         let unixRebuilt = anotherDangArray[0]
-                        let doseEvent = {
-                            title: pillName,
-                            start: unixRebuilt,
-                            allDay: false,
+                        if(!runningLow){
+                            let doseEvent = {
+                                title: pillName,
+                                start: unixRebuilt,
+                                allDay: false,
+                            }
+                            eventsArr.push(doseEvent)
+                        }else{
+                            let doseEvent = {
+                                title: pillName,
+                                start: unixRebuilt,
+                                allDay: false,
+                                backgroundColor: "red"
+                            }
+                            eventsArr.push(doseEvent)
                         }
-                        eventsArr.push(doseEvent)
-                        i = i + freqInterval;
+
+                        z = z + freqInterval;
                     }
                 };
                 resolve(eventsArr);
@@ -360,7 +345,6 @@ $(document).ready(function () {
                 result.forEach(obj => {
                     calendarObject.events.push(obj);
                 })
-                console.log(calendarObject.events)
             })
             // return (holderArr)
         }
