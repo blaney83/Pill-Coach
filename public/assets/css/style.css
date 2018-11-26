@@ -89,7 +89,7 @@ body {
 }
 
 .middlePage {
-  margin-top: 200px;
+  margin-top: 20px;
 }
 .centered, .form-control, .col-md-offset-3 >h2 {
   text-align: center
@@ -276,9 +276,20 @@ margin-bottom: 20px;
     animation-name: fadeInRight;
 }
 
+.loginTitle {
+  font-family: 'SkyTree';
+  font-size: 100px; 
+  margin-top: 105px;  
+}
+
 @font-face {
   font-family: 'Vonique';
   src: url(../images/Vonique\ 64\ Bold.ttf)
+}
+
+@font-face {
+  font-family: 'SkyTree';
+  src: url(../images/Skytree\ one.ttf)
 }
 
 .deleteButton {
