@@ -282,6 +282,25 @@ margin-bottom: 20px;
   margin-top: 105px;  
 }
 
+
+
+#dosingInfoParsed > ul, #dosingInfoParsed > ul > li > ul, #dosingInfoParsed > div > ul, #dosingInfoParsed > div > ul > li > ul {
+  padding-inline-start: 0px;
+  list-style: none;
+}
+
+#sideEffectsLists > ul {
+  list-style: inside;
+  padding-inline-start: 0px;
+}
+
+#doNotUseWith > li {
+  padding-inline-start: 0px;
+  list-style: none;
+  
+}
+
+
 @font-face {
   font-family: 'Vonique';
   src: url(../images/Vonique\ 64\ Bold.ttf)
