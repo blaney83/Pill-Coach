@@ -53,12 +53,11 @@ function createPillEvents(pillObj) {
                 i = i + freqInterval;
             }
         };
-
+        
         resolve(eventsArr);
     })
-
+    
     // This is intended to increment one day based upon the date created
-
     let sendObject = eventsPromise.then(result => {
         var calendarObject = {
             url: "#",
@@ -85,7 +84,7 @@ function createPillEvents(pillObj) {
                 }
             },
             events: function (start, end, timezone, callback) {
-
+    
             },
             events: [
                 {
@@ -98,10 +97,11 @@ function createPillEvents(pillObj) {
                 }
             ],
         };
-
+    
         // calendarObject.events.push(result);
         return (calendarObject)
     })
     console.log(sendObject)
     return (sendObject)
+    
 }
