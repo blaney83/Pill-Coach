@@ -241,7 +241,6 @@ $(document).ready(function () {
         //calendar object
         var calendarObject = {
             url: "#",
-            // themeSystem: "jquery-ui",
             color: 'black',     // an option!
             textColor: 'orange', // an option!
             backgroundColor: "red",

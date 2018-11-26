@@ -1290,6 +1290,7 @@ be a descendant of the grid when it is being dragged.
   vertical-align: middle;
   text-align: center; }
 
-.fc-unthemed .fc-list-empty {
-  /* theme will provide own background */
-  background-color: #eee; }
+  .fc-unthemed .fc-list-empty {
+    /* theme will provide own background */
+    background-color: rgba(0, 0, 0, .3);
+    border-radius: 20px; }
