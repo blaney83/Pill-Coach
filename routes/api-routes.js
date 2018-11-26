@@ -60,8 +60,8 @@ module.exports = function (app) {
       frequency_amount: req.body.frequency_amount,
       frequency_time: req.body.frequency_time,
       frequency_interval: req.body.frequency_interval,
-      initial_time: 0,
-      initial_date: 0,
+      initial_time: Date(),
+      // initial_date: 0,
       UserId: req.body.UserId
     }).then(function() {
       res.json({url: "/"});
@@ -82,35 +82,37 @@ module.exports = function (app) {
   })
 
   app.get("/api/user_pills", function(req, res) {
-    if (!req.user) {
+    console.log(req)
+    // if (!req.user) {
       db.Pill.findAll({
-        // where: {
-        //   UserId: req.body.UserId
-        // }
+        where: {
+          UserId: req.user.id
+        }
       }).then(function(pillsArray) {
-        console.log(pillsArray);
+        console.log("listening")
+        // console.log(pillsArray);
         res.json(pillsArray);
       })
-    }
+    // }
 
 
   });
-  app.post("/api/upcoming_doses", function(req, res) {
-    if (!req.user) {
-      res.json({});
-    }
-    else {
-      res.json({
-        rx_name: req.user.rx_name,
-        start: req.user.initial_time + req.user.initial_date,
-        dosage: req.user.dosage,
-        quantity: req.user.quantity,
-        frequency_amount: req.body.frequency_amount,
-        frequency_time: req.body.frequency_time,
-        frequency_interval: req.body.frequency_interval,
-        allDay: false
-      })
-    }
-  });
+  // app.post("/api/upcoming_doses", function(req, res) {
+  //   if (!req.user) {
+  //     res.json({});
+  //   }
+  //   else {
+  //     res.json({
+  //       rx_name: req.user.rx_name,
+  //       start: req.user.initial_time + req.user.initial_date,
+  //       dosage: req.user.dosage,
+  //       quantity: req.user.quantity,
+  //       frequency_amount: req.body.frequency_amount,
+  //       frequency_time: req.body.frequency_time,
+  //       frequency_interval: req.body.frequency_interval,
+  //       allDay: false
+  //     })
+  //   }
+  // });
   
 };
