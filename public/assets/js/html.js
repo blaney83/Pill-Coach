@@ -235,6 +235,8 @@ $(document).ready(function () {
         });
     }
 
+    //! Below is for the calendar
+
     createAndRenderEvents()
 
     function createAndRenderEvents() {
@@ -251,7 +253,7 @@ $(document).ready(function () {
             noEventDefault: "No Pills Scheduled",
             header: {
                 left: "prev, next",
-                center: 'addEventButton',
+                // center: 'addEventButton',
                 right: "listDay,month"
             },
             customButtons: {
