@@ -39,8 +39,10 @@ function createPillEvents(pillObj) {
                 timeArray.splice(0, 1, eventTime)
                 let timeString = timeArray.join(":")
                 unixArray.splice(1, 1, timeString)
-                unixRebuilt = unixArray.join("T")
-
+                let intermediate = unixArray.join("T")
+                let anotherDangArray = intermediate.split(".")
+                let unixRebuilt = anotherDangArray[0]
+                console.log(unixRebuilt)
                 let doseEvent = {
                     title: pillName,
                     start: unixRebuilt,
@@ -81,6 +83,9 @@ function createPillEvents(pillObj) {
                 },
                 day: {
                 }
+            },
+            events: function (start, end, timezone, callback) {
+
             },
             events: [
                 {
