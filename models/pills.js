@@ -32,12 +32,13 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false
         },
         initial_time: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DATE,
             allowNull: false
         },
-        initial_date: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+        start_time: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "08"
         }
     },
         {

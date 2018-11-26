@@ -232,5 +232,39 @@ $(document).ready(function () {
             console.log(err);
         });
     }
+
+    //load calendar
+    let prom = new Promise(function(resolve, reject) {
+        
+        let rObj = [];
+      console.log(1)
+      $.ajax({
+        method: "GET",
+        url: '/api/user_pills'
+        
+      }).then(function (resp) {
+        console.log(2)
+        console.log(resp);
+        rObj.push(resp)
+        // createPillEvents(resp.Pill)
+        resolve(rObj);
+      });
+
+    });
+    
+    prom.then(function(val) {
+      let value = val[0];
+      value.forEach(function(obj) {
+        console.log(obj);
+        $("#calendar").fullCalendar(createPillEvents(obj))
+      })
+      console.log(val[0]);
+      
+    });
+    
+
+
+
+
 });
 

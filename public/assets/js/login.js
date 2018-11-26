@@ -1,3 +1,5 @@
+
+
 $(document).ready(function() {
   // Getting references to our form and inputs
   var loginForm = $("form.login");
@@ -32,7 +34,9 @@ $(document).ready(function() {
     }).then(function(data) {
       console.log(data.url)
       console.log(data)
+
       window.location.replace(data.url);
+
       // If there's an error, log the error
     }).catch(function(err) {
       alert("Sorry, looks like the email or password is incorrect or does not exist.")
