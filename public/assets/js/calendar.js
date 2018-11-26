@@ -73,28 +73,28 @@ $(document).ready(function () {
                 allDay: false
             },
             {
-                title: 'Viagra',
+                title: 'Flonase',
                 start: '2018-11-20T12:52:00',
                 dosage: "200 mg",
                 quantity: "2",
                 allDay: false // will make the time show
             },
             {
-                title: 'Viagra',
+                title: 'Flonase',
                 start: '2018-11-23T12:52:00',
                 dosage: "200 mg",
                 quantity: "2",
                 allDay: false // will make the time show
             },
             {
-                title: 'Viagra',
+                title: 'Flonase',
                 start: '2018-11-24T12:52:00',
                 dosage: "200 mg",
                 quantity: "2",
                 allDay: false // will make the time show
             },
             {
-                title: 'Viagra',
+                title: 'Flonase',
                 start: '2018-11-25T12:52:00',
                 dosage: "200 mg",
                 quantity: "2",
