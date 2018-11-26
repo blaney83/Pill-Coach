@@ -251,7 +251,7 @@ $(document).ready(function () {
             noEventDefault: "No Pills Scheduled",
             header: {
                 left: "prev, next",
-                center: 'addEventButton',
+                center: 'title',
                 right: "listDay,month"
             },
             defaultView: "listDay",
@@ -263,16 +263,7 @@ $(document).ready(function () {
                 day: {
                 }
             },
-            events: [
-                {
-                    title: 'Test',
-                    // start: new Date(y, m, 23, 18, 30),
-                    start: '2018-11-25T12:40:00',
-                    dosage: "200 mg",
-                    quantity: "2",
-                    allDay: false
-                }
-            ],
+            events: [],
         };
 
         $.ajax({
