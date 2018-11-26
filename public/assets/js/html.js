@@ -149,7 +149,8 @@ $(document).ready(function () {
                 }
                 //creates wikipedia links for all values in an array
                 function ListSmartLinks(array) {
-                    let starterArray = ["<ul>"]
+                    // let starterArray = ["<ul>"]
+                    let starterArray = []
                     array.forEach(function (val) {
                         let valArr = val.split("");
                         let urlSnip = []
@@ -170,10 +171,11 @@ $(document).ready(function () {
                             }
                         })
                         let builtUrl = "https://en.wikipedia.org/wiki/" + urlSnip.join("")
-                        let listItem = '<li><a href="' + builtUrl + '">' + val + '</a></li>'
+                        // let listItem = '<li><a href="' + builtUrl + '">' + val + '</a></li>'
+                        let listItem = '<div><a href="' + builtUrl + '">' + val + '</a></div>'
                         starterArray.push(listItem)
                     });
-                    starterArray.push("</ul>")
+                    // starterArray.push("</ul>")
                     let returnString = starterArray.join("")
                     return (returnString);
                 };
