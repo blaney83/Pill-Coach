@@ -17,7 +17,10 @@ body {
   border-radius: 20px;
   background-size: cover;
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, .3);
+  position: relative;
+  
 }
+
 #tile-cont {
   background-color:rgba(255, 255, 255, .4);
   padding: 35px;
@@ -64,10 +67,16 @@ body {
 }
 
 .pillName {
-  background-color: rgba(0, 0, 0, .5); 
+  background-color: rgba(0, 0, 0, .65); 
   color: white; 
   width: 100%; 
   margin: 0;
+  position: absolute; 
+  top: 40%; 
+  z-index: 1;
+  padding: 6px;
+
+
 }
 
 .fc-scroller {
@@ -204,8 +213,6 @@ margin-bottom: 20px;
   overflow-y: auto;
   height: 80px;
   border-radius: 8px;
-
-
 }
 
 #new-pill {
@@ -261,7 +268,24 @@ margin-bottom: 20px;
     animation-duration: .7s;
     transition-timing-function: ease-in-out;
     animation-fill-mode: both;
+}
 
+.overlay {
+  background-color: rgba(255, 255, 255, .55);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 20px;
+  width: 100%;
+  opacity: 1;
+  height: 100%;
+  z-index: 1;
+  transition: .5s ease;
+}
+
+button:hover .overlay {
+  opacity: 0;
+  cursor: pointer;
 }
 
 .scene_element--fadein {
@@ -325,3 +349,24 @@ margin-bottom: 20px;
   color: white;
   font-weight: bolder;
 }
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  
+
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {...} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {...} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {...}
