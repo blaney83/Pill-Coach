@@ -1,4 +1,3 @@
-
 //current code for Modal vvvvvvvvvvvvvvv
 $(document).ready(function () {
     //toggle modal listener
@@ -14,7 +13,7 @@ $(document).ready(function () {
         deleteElement(event)
     })
     //this will be a generic delete rx function
-    function deleteElement(eventArr){
+    function deleteElement(eventArr) {
         eventArr.stopPropagation()
         eventArr.isImmediatePropagationStopped()
         let clickTarget = eventArr.target.id;
@@ -62,7 +61,7 @@ $(document).ready(function () {
                 if (resp == "") {
                     //code for bad request
                     $("#newModal").modal("toggle")
-                    $(".infoModal").html("<div class='modal-header badModal'><div class='modal-body centered'><h1>Oops!</h1><p> Looks like that medicine can't be found! Please check your spelling and try again!</p></div>"+ "<button class='deleteButton removeButton' id='" + clickTarget + "'>Remove Rx</button></div>")
+                    $(".infoModal").html("<div class='modal-header badModal'><div class='modal-body centered'><h1>Oops!</h1><p> Looks like that medicine can't be found! Please check your spelling and try again!</p></div>" + "<button class='deleteButton removeButton' id='" + clickTarget + "'>Remove Rx</button></div>")
                 } else if (resp.sideEffects == "" || resp.generalInfo == "") {
                     //handle a partial data return
                 } else {
@@ -91,7 +90,7 @@ $(document).ready(function () {
                                 || array[1] == "<ul>" || array[1] == [""] || array[1] == ""
                             ) {
                                 let missingSelector = array[0]
-                                missingDataCounter ++;
+                                missingDataCounter++;
                                 missingDataSelectorArray.push(missingSelector)
                                 //if the image is null, load a default image
                                 if (array[0] == "imageElement") {
@@ -112,9 +111,9 @@ $(document).ready(function () {
                                 //create target selector with key and pass it 
                                 $("#" + array[0]).html(ListSmartLinks(array[1]))
                             }
-                            else if(array[0]== "sideEffectsLists"){
+                            else if (array[0] == "sideEffectsLists") {
                                 let htmlArray = array[1]
-                                $("#" + array[0]).html(htmlArray[0])                                
+                                $("#" + array[0]).html(htmlArray[0])
                             } // if data is not missing, take that key as a selector and set the html equal to the data
                             else {
                                 console.log(array[0] + "is not missing data")
@@ -123,23 +122,23 @@ $(document).ready(function () {
                         })
                     })
                     //if there is a high amount of missing content, default with a message
-                    if(missingDataCounter > 3){
+                    if (missingDataCounter > 3) {
                         //this will create a generic string
                         let genericGenerator = rx.split(" ");
                         let genericBrand = genericGenerator[0]
                         //this array holds all the strings to create supplementary links
                         let linksArray = [rx]
                         //if the medicine is multi-worded, create a second link
-                        if(genericGenerator.length > 1){
+                        if (genericGenerator.length > 1) {
                             linksArray.push(genericBrand)
                         }
                         //for each missing selector, remove its related elements
-                        missingDataSelectorArray.forEach(selector=>{
-                            $("." + selector).css({display: "none"})
+                        missingDataSelectorArray.forEach(selector => {
+                            $("." + selector).css({ display: "none" })
                         })
                         //show the missing info message
                         $("#overviewContent").append("<br><div class='backupMessage'><h6>Looks like our information on this drug is has more holes than usual.</h6><p>If you are searching for a very specific type of medicine or a brand name RX, you may have better luck with the generic version. Here are some links which might be helpful:" + ListSmartLinks(linksArray) + "<br><p>If you would rather remove this medication and try again, click here: <button class='emergencyDelete' id='" + clickTarget + "'>Remove RX</button></p></div>")
-                    }else{
+                    } else {
                         //remove the backup message if it exists
                         $(".backupMessage").remove()
                         //fix the display on the elements
@@ -199,13 +198,9 @@ $(document).ready(function () {
     let freqTime = $("input#freq-time")
     let freqInt = $("select#freq-int")
     let UserId = $("input#user-id")
-    let initTime = $("select#init-time")
 
     newPillForm.on("submit", function (event) {
         event.preventDefault();
-
-        let time = initTime.val()
-
         let pillData = {
             rx_name: rxName.val().trim(),
             dosage: dosage.val().trim(),
@@ -213,16 +208,16 @@ $(document).ready(function () {
             frequency_amount: freqAmount.val().trim(),
             frequency_time: freqTime.val().trim(),
             frequency_interval: freqInt.val(),
-            initial_time: time.slice(0,2),
             UserId: UserId.val()
         }
         console.log(pillData)
         console.log(pillData.rx_name)
-        addPill(pillData.rx_name, pillData.dosage, pillData.quantity, pillData.frequency_amount, pillData.frequency_time, pillData.frequency_interval, pillData.initial_time, pillData.UserId)
-        
+        addPill(pillData.rx_name, pillData.dosage, pillData.quantity, pillData.frequency_amount, pillData.frequency_time, pillData.frequency_interval, pillData.UserId)
+        createAndRenderEvents();
+
     })
 
-    function addPill(rx_name, dosage, quantity, frequency_amount, frequency_time, frequency_interval, initial_time,UserId) {
+    function addPill(rx_name, dosage, quantity, frequency_amount, frequency_time, frequency_interval, UserId) {
         $.post("/api/user_pills", {
             rx_name: rx_name,
             dosage: dosage,
@@ -230,49 +225,144 @@ $(document).ready(function () {
             frequency_amount: frequency_amount,
             frequency_time: frequency_time,
             frequency_interval: frequency_interval,
-            initial_time: initial_time,
             UserId: UserId
         }).then(function (data) {
             console.log(data.url)
             $("#pillModal").modal("toggle")
             window.location = "/meds"
-        }).catch(function(err) {
+        }).catch(function (err) {
             console.log(err);
         });
     }
 
-    //load calendar
-    let prom = new Promise(function(resolve, reject) {
-        
-        let rObj = [];
-      console.log(1)
-      $.ajax({
-        method: "GET",
-        url: '/api/user_pills'
-        
-      }).then(function (resp) {
-        console.log(2)
-        console.log(resp);
-        rObj.push(resp)
-        // createPillEvents(resp.Pill)
-        resolve(rObj);
-      });
+    createAndRenderEvents()
 
-    });
-    
-    prom.then(function(val) {
-      let value = val[0];
-      value.forEach(function(obj) {
-        console.log(obj);
-        $("#calendar").fullCalendar(createPillEvents(obj))
-      })
-      console.log(val[0]);
-      
-    });
-    
+    function createAndRenderEvents() {
+        //calendar object
+        var calendarObject = {
+            url: "#",
+            // themeSystem: "jquery-ui",
+            color: 'black',     // an option!
+            textColor: 'orange', // an option!
+            backgroundColor: "red",
+            selectable: true,
+            editable: true,
+            contentHeight: 200,
+            noEventDefault: "No Pills Scheduled",
+            header: {
+                left: "prev, next",
+                center: 'addEventButton',
+                right: "listDay,month"
+            },
+            customButtons: {
+                addEventButton: {
+                    text: 'Add a Pill',
+                    textColor: 'orange',
+                    click: function () {
+                        var dateStr = prompt('Enter a date in YYYY-MM-DD format');
+                        var date = moment(dateStr);
 
+                        if (date.isValid()) {
+                            $('#calendar').fullCalendar('renderEvent', {
+                                title: 'dynamic event', //Name of pill
+                                start: date, //date provided by user, in unix
+                                allDay: false
+                            });
+                            alert('Great. Now, update your database...');
+                        } else {
+                            alert('Invalid date.');
+                        }
+                    }
+                }
+            },
+            defaultView: "listDay",
+            views: {
+                month: { // name of view
+                    titleFormat: 'MMMM YYYY'
+                    // other view-specific options here
+                },
+                day: {
+                }
+            },
+            events: [
+                {
+                    title: 'Test',
+                    // start: new Date(y, m, 23, 18, 30),
+                    start: '2018-11-25T12:40:00',
+                    dosage: "200 mg",
+                    quantity: "2",
+                    allDay: false
+                }
+            ],
+        };
 
+        $.ajax({
+            method: "GET",
+            url: '/api/user_pills'
+        }).then(function (resp) {
+            let allPillsEventsPromise = new Promise((resolve, reject) => {
+                resp.forEach(function (obj) {
+                    createPillEvents(obj)
+                });
+                resolve("woo this works")
+            })
+            allPillsEventsPromise.then(res => {
+                $("#calendar").fullCalendar(calendarObject)
+            })
+        });
 
+        function createPillEvents(pillObj) {
+            let eventsArr = [];
+            let eventsPromise = new Promise(function (resolve, reject) {
+                let daysOfEventsCreated = pillObj.quantity / pillObj.frequency_amount;
+                for (var i = 0; i <= daysOfEventsCreated; i++) {
+                    console.log("this is firing" + pillObj)
+                    let missingT = pillObj.initial_date.split(" ");
+                    let fullCalFormat = missingT.join("T")
+                    let splitArray = fullCalFormat.split("-");
+                    let dayWithTime = splitArray[2];
+                    let anotherArray = dayWithTime.split("T");
+                    let newDay = parseInt(anotherArray[0]) + i;
+                    anotherArray.splice(0, 1, newDay);
+                    let rebuiltDayTime = anotherArray.join("T");
+                    splitArray.splice(2, 1, rebuiltDayTime);
+                    let newDateSting = splitArray.join("-");
+                    let eventDate = newDateSting;
+                    createOneDayOfEvents(eventDate, pillObj.frequency_amount, pillObj.frequency_time, pillObj.start_time, pillObj.rx_name);
+                };
 
+                function createOneDayOfEvents(eventDate, freq, freqInterval, startTime, pillName) {
+                    let duration = (freq * freqInterval);
+                    for (var i = 0; i < duration;) {
+
+                        let unixArray = eventDate.split("T")
+                        let timeArray = unixArray[1].split(":")
+                        let eventTime = parseInt(startTime) + i;
+                        timeArray.splice(0, 1, eventTime)
+                        let timeString = timeArray.join(":")
+                        unixArray.splice(1, 1, timeString)
+                        let intermediate = unixArray.join("T")
+                        let anotherDangArray = intermediate.split(".")
+                        let unixRebuilt = anotherDangArray[0]
+                        let doseEvent = {
+                            title: pillName,
+                            start: unixRebuilt,
+                            allDay: false,
+                        }
+                        eventsArr.push(doseEvent)
+                        i = i + freqInterval;
+                    }
+                };
+                resolve(eventsArr);
+            })
+            // This is intended to increment one day based upon the date created
+            eventsPromise.then(result => {
+                result.forEach(obj => {
+                    calendarObject.events.push(obj);
+                })
+                console.log(calendarObject.events)
+            })
+            // return (holderArr)
+        }
+    }
 });
-
