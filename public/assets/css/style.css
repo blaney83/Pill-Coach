@@ -24,12 +24,27 @@ body {
   border-radius: 20px;
 
 }
+
+.containerBackground {
+  padding: 30px;
+}
+
+#imageElement {
+  padding: 20px;
+}
+
+#imageElement > img {
+  height: 150px;
+  width: auto; 
+  border-radius: 10px;
+}
+
 #title {
   color: white;
   text-align: center; 
   font-family: 'Vonique';
   font-size: 33px;
-  margin-left: -16px;
+  margin-left: -16px; 
   margin-right: -16px;
 }
 
@@ -155,7 +170,7 @@ margin-bottom: 20px;
 }
 
 .card-body {
-  height: 275px;
+  height: 200px;
   overflow-y: auto;
   background-color: rgba(255, 255, 255, .5);
   border-radius: 20px;
@@ -187,8 +202,7 @@ margin-bottom: 20px;
 
 #overviewContent {
   overflow-y: auto;
-  height: 110px;
-  margin-bottom: 20px;
+  height: 80px;
   border-radius: 8px;
 
 
@@ -232,6 +246,16 @@ margin-bottom: 20px;
   }
 }
 
+.badModal {
+  border-radius: 30px;
+  border: 0px;
+  height: 200px;
+}
+
+.removeButton {
+  top: 13px !important;
+  right: 14px !important;
+}
   /** Basic styles for an animated element */
 .scene_element {
     animation-duration: .7s;
