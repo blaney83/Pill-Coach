@@ -131,12 +131,15 @@ module.exports = function (app) {
                             arrayOfArraysOfEffects.forEach(function (arrayOfEffects) {
                                 let holdMyString = ["<p>"];
                                 let effectsListHeader = arrayOfEffects[0] + "</p><ul>"
+                                // let effectsListHeader = arrayOfEffects[0] + "</p><div>"
                                 holdMyString.push(effectsListHeader)
                                 for (i = 1; i < arrayOfEffects.length; i++) {
                                     let listItem = "<li>" + arrayOfEffects[i] + "</li>"
+                                    // let listItem = arrayOfEffects[i]
                                     holdMyString.push(listItem);
                                 }
                                 holdMyString.push("</ul>");
+                                // holdMyString.push("</div>");
                                 let finishedListHtml = holdMyString.join("")
                                 //send that info back to the variable that will be sent on the response
                                 sideEffectsLists.push(finishedListHtml)
