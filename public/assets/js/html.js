@@ -2,9 +2,9 @@
 //current code for Modal vvvvvvvvvvvvvvv
 $(document).ready(function () {
     //toggle modal listener
-    $(document).on("click", ".tile", function (event) {
-        $("#exampleModalLong").modal("toggle")
-    })
+    // $(document).on("click", ".tile", function (event) {
+    //     $("#exampleModalLong").modal("toggle")
+    // })
     //delete tile code; removes tile and db pill row
     $(document).on("click", ".deleteButton", function (event) {
         deleteElement(event)
@@ -61,11 +61,14 @@ $(document).ready(function () {
                 console.log(resp)
                 if (resp == "") {
                     //code for bad request
-                    $(".infoModal").html("<div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h1>Oops! Looks like that medicine can't be found! Please check your spelling and try again!</h1>" + "<button class='deleteButton' id='" + clickTarget + "'>Remove Rx</button></div>")
+                    $("#newModal").modal("toggle")
+                    $(".infoModal").html("<div class='modal-header badModal'><div class='modal-body centered'><h1>Oops!</h1><p> Looks like that medicine can't be found! Please check your spelling and try again!</p></div>"+ "<button class='deleteButton removeButton' id='" + clickTarget + "'>Remove Rx</button></div>")
                 } else if (resp.sideEffects == "" || resp.generalInfo == "") {
                     //handle a partial data return
                 } else {
                     //everything worked just fine
+                    //brings up the correct modal for the pill description
+                    $("#exampleModalLong").modal("toggle")
                     console.log(Object.entries(resp.sideEffects))
                     console.log(Object.entries(resp.generalInfo))
                     //this creates an array of arrays with the keys for the side effects blob at [0] and the data at [1]
@@ -224,13 +227,10 @@ $(document).ready(function () {
         }).then(function (data) {
             console.log(data.url)
             $("#pillModal").modal("toggle")
+            window.location = "/meds"
         }).catch(function(err) {
             console.log(err);
         });
-
-        $.get("/meds").then(function(data){
-            window.location = "/meds"
-        })
     }
 
     //load calendar
@@ -268,4 +268,3 @@ $(document).ready(function () {
 
 });
 
-    
